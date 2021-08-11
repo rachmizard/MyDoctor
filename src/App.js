@@ -5,7 +5,7 @@ import {usePersistNavigation} from 'hooks';
 import {ActivityIndicator} from 'react-native';
 
 export default function App() {
-  const [initialState, isReady, setItem, PERSISTENCE_KEY] =
+  const {initialState, getPersistenceKey, isReady, setAsyncStorage} =
     usePersistNavigation();
 
   if (!isReady) {
@@ -15,7 +15,9 @@ export default function App() {
   return (
     <NavigationContainer
       initialState={initialState}
-      onStateChange={state => setItem(PERSISTENCE_KEY, JSON.stringify(state))}>
+      onStateChange={state =>
+        setAsyncStorage(getPersistenceKey, JSON.stringify(state))
+      }>
       <Navigations />
     </NavigationContainer>
   );

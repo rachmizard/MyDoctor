@@ -33,5 +33,10 @@ export function usePersistNavigation() {
     }
   }, [isReady]);
 
-  return [initialState, isReady, AsyncStorage.setItem, PERSISTENCE_KEY];
+  return {
+    initialState,
+    isReady,
+    getPersistenceKey: PERSISTENCE_KEY,
+    setAsyncStorage: AsyncStorage.setItem,
+  };
 }
