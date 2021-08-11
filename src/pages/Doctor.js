@@ -14,6 +14,7 @@ export default function Doctor() {
     <View style={styles.page}>
       <View style={styles.content}>
         <ScrollView showsVerticalScrollIndicator={false}>
+          <Gap height={30} />
           <HomeProfile />
           <Text style={styles.welcome}>
             Mau konsultasi dengan siapa hari ini?
@@ -39,6 +40,7 @@ export default function Doctor() {
           <NewsItem />
           <NewsItem />
           <NewsItem />
+          <Gap height={30} />
         </ScrollView>
       </View>
     </View>
@@ -53,7 +55,6 @@ const styles = StyleSheet.create({
   content: {
     flex: 1,
     paddingHorizontal: 16,
-    paddingVertical: 30,
     backgroundColor: colors.white,
     borderBottomLeftRadius: 20,
     borderBottomRightRadius: 20,
