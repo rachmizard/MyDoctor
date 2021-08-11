@@ -4,7 +4,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const PERSISTENCE_KEY = 'NAVIGATION_STATE';
 
-export function usePersistNavigation() {
+function usePersistNavigation() {
   const [isReady, setIsReady] = useState(__DEV__ ? false : true);
   const [initialState, setInitialState] = useState();
 
@@ -40,3 +40,5 @@ export function usePersistNavigation() {
     setAsyncStorage: AsyncStorage.setItem,
   };
 }
+
+export default usePersistNavigation;

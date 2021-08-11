@@ -1,1 +1,3 @@
-export * from './usePersistNavigation';
+import usePersistNavigation from './usePersistNavigation';
+
+export {usePersistNavigation};
