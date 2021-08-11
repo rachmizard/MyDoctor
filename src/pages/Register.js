@@ -1,4 +1,4 @@
-import {Button, Gap, Header, Input} from 'components';
+import {Button, Gap, Input} from 'components';
 import React from 'react';
 import {StyleSheet, View} from 'react-native';
 import {colors} from 'utils';
@@ -6,7 +6,6 @@ import {colors} from 'utils';
 export default function Register({navigation}) {
   return (
     <View style={styles.page}>
-      <Header onPress={() => navigation.goBack()} title="Daftar Akun" />
       <View style={styles.content}>
         <Input label="Full Name" />
         <Gap height={24} />
@@ -16,7 +15,10 @@ export default function Register({navigation}) {
         <Gap height={24} />
         <Input label="Password" />
         <Gap height={24} />
-        <Button title="Continue" />
+        <Button
+          title="Continue"
+          onPress={() => navigation.navigate('UploadPhoto')}
+        />
       </View>
     </View>
   );
