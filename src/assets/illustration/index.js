@@ -2,4 +2,17 @@ import ILLogo from './logo.svg';
 import ILGetstarted from './get-started.png';
 import ILUserDefault from './user-default.png';
 
-export {ILLogo, ILGetstarted, ILUserDefault};
+import ILDokterAnak from './ic-dokter-anak.svg';
+import ILDokterObat from './ic-dokter-obat.svg';
+import ILDokterPsikiater from './ic-dokter-psikiater.svg';
+import ILDokterUmum from './ic-dokter-umum.svg';
+
+export {
+  ILLogo,
+  ILGetstarted,
+  ILUserDefault,
+  ILDokterAnak,
+  ILDokterObat,
+  ILDokterPsikiater,
+  ILDokterUmum,
+};
