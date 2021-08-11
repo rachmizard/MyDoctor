@@ -11,14 +11,16 @@ import {
   MessagesPage,
   HospitalsPage,
 } from 'pages';
-import {Header} from 'components';
+import {BottomNavigator, Header} from 'components';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
 
 const MainApp = () => {
   return (
-    <Tab.Navigator screenOptions={{headerShown: false}}>
+    <Tab.Navigator
+      tabBar={props => <BottomNavigator {...props} />}
+      screenOptions={{headerShown: false}}>
       <Tab.Screen component={DoctorPage} name="Doctor" />
       <Tab.Screen component={MessagesPage} name="Messages" />
       <Tab.Screen component={HospitalsPage} name="Hospitals" />
@@ -28,7 +30,7 @@ const MainApp = () => {
 
 export default function Navigations() {
   return (
-    <Stack.Navigator initialRouteName="Splash">
+    <Stack.Navigator initialRouteName="MainApp">
       <Stack.Screen
         name="Splash"
         component={SplashPage}
