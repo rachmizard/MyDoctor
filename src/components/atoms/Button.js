@@ -1,6 +1,6 @@
 import React from 'react';
 import {StyleSheet, Text, TouchableOpacity} from 'react-native';
-import {colors} from 'utils';
+import {colors, fonts} from 'utils';
 
 export default function Button({title, type, onPress}) {
   return (
@@ -24,6 +24,6 @@ const styles = StyleSheet.create({
       type === 'secondary'
         ? colors.button.secondary.text
         : colors.button.primary.text,
-    fontFamily: 'Nunito-SemiBold',
+    fontFamily: fonts.primary[600],
   }),
 });
