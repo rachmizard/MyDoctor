@@ -26,6 +26,7 @@ const styles = StyleSheet.create({
   text: bold => ({
     fontSize: 12,
     fontFamily: fonts.primary[bold],
+    color: colors.text.primary,
   }),
   illustration: {
     marginBottom: 28,
