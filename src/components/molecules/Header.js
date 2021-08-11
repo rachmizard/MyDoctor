@@ -4,11 +4,11 @@ import {ICBackDark} from 'assets';
 import {Gap, IconButton} from 'components/atoms';
 import {colors, fonts} from 'utils';
 
-export default function Header({title, onPress}) {
+export default function Header({options, navigation}) {
   return (
     <View style={styles.header}>
-      <IconButton icon={<ICBackDark />} onPress={onPress} />
-      <Text style={styles.title}>{title}</Text>
+      <IconButton icon={<ICBackDark />} onPress={() => navigation.goBack()} />
+      <Text style={styles.title}>{options.headerTitle}</Text>
       <Gap width={24} />
     </View>
   );

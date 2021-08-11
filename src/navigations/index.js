@@ -1,6 +1,13 @@
 import React from 'react';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import {GetStartedPage, RegisterPage, SplashPage, LoginPage} from 'pages';
+import {
+  GetStartedPage,
+  RegisterPage,
+  SplashPage,
+  LoginPage,
+  UploadPhotoPage,
+} from 'pages';
+import {Header} from 'components';
 
 const Stack = createNativeStackNavigator();
 
@@ -20,7 +27,18 @@ export default function Navigations() {
       <Stack.Screen
         name="Register"
         component={RegisterPage}
-        options={{headerShown: false}}
+        options={{
+          headerTitle: 'Daftar Akun',
+          header: props => <Header {...props} />,
+        }}
+      />
+      <Stack.Screen
+        name="UploadPhoto"
+        component={UploadPhotoPage}
+        options={{
+          headerTitle: 'Upload Photo',
+          header: props => <Header {...props} />,
+        }}
       />
       <Stack.Screen
         name="Login"
