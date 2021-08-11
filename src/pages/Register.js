@@ -3,10 +3,10 @@ import React from 'react';
 import {StyleSheet, View} from 'react-native';
 import {colors} from 'utils';
 
-export default function Register() {
+export default function Register({navigation}) {
   return (
     <View style={styles.page}>
-      <Header />
+      <Header onPress={() => navigation.goBack()} title="Daftar Akun" />
       <View style={styles.content}>
         <Input label="Full Name" />
         <Gap height={24} />

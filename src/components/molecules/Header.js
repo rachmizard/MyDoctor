@@ -1,14 +1,14 @@
 import React from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 import {ICBackDark} from 'assets';
-import {Gap} from 'components/atoms';
-import {colors} from 'utils';
+import {Gap, IconButton} from 'components/atoms';
+import {colors, fonts} from 'utils';
 
-export default function Header() {
+export default function Header({title, onPress}) {
   return (
     <View style={styles.header}>
-      <ICBackDark />
-      <Text style={styles.title}>Daftar Akun</Text>
+      <IconButton icon={<ICBackDark />} onPress={onPress} />
+      <Text style={styles.title}>{title}</Text>
       <Gap width={24} />
     </View>
   );
@@ -26,7 +26,7 @@ const styles = StyleSheet.create({
   title: {
     textAlign: 'center',
     flex: 1,
-    fontFamily: 'Nunito-SemiBold',
+    fontFamily: fonts.primary[600],
     fontSize: 20,
     color: colors.text.primary,
   },

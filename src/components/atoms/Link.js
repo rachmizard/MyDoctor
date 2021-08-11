@@ -1,18 +1,19 @@
 import React from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, Text, TouchableWithoutFeedback, View} from 'react-native';
+import {colors, fonts} from 'utils';
 
-export default function Link({title, size, align}) {
+export default function Link({title, size, align, onPress}) {
   return (
-    <View>
+    <TouchableWithoutFeedback onPress={onPress}>
       <Text style={styles.link(size, align)}>{title}</Text>
-    </View>
+    </TouchableWithoutFeedback>
   );
 }
 
 const styles = StyleSheet.create({
   link: (size, align) => ({
-    fontFamily: 'Nunito-Regular',
-    color: '#7D8797',
+    fontFamily: fonts.primary.normal,
+    color: colors.text.secondary,
     textDecorationLine: 'underline',
     fontSize: size,
     textAlign: align,
