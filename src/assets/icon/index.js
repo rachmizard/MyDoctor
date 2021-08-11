@@ -7,6 +7,11 @@ import ICMessagesActive from './ic-messages-active.svg';
 import ICHospital from './ic-hospital.svg';
 import ICHospitalActive from './ic-hospital-active.svg';
 
+import ICDokterAnak from './ic-dokter-anak.svg';
+import ICDokterObat from './ic-dokter-obat.svg';
+import ICDokterPsikiater from './ic-dokter-psikiater.svg';
+import ICDokterUmum from './ic-dokter-umum.svg';
+
 export {
   ICBackDark,
   ICAddBtnPhoto,
@@ -16,4 +21,8 @@ export {
   ICMessagesActive,
   ICHospital,
   ICHospitalActive,
+  ICDokterAnak,
+  ICDokterObat,
+  ICDokterPsikiater,
+  ICDokterUmum,
 };

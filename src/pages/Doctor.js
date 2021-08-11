@@ -1,10 +1,10 @@
 import {DoctorCategory, HomeProfile, NewsItem, RatedDoctor} from 'components';
 import React from 'react';
-import {View, Text} from 'react-native';
+import {View, Text, StyleSheet} from 'react-native';
 
 export default function Doctor() {
   return (
-    <View>
+    <View style={styles.page}>
       <HomeProfile />
       <Text>Mau konsultasi dengan siapa hari ini?</Text>
       <DoctorCategory />
@@ -22,3 +22,11 @@ export default function Doctor() {
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+  page: {
+    flex: 1,
+    paddingHorizontal: 16,
+    paddingVertical: 30,
+  },
+});
