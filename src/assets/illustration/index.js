@@ -7,6 +7,8 @@ import ILDokterObat from './ic-dokter-obat.svg';
 import ILDokterPsikiater from './ic-dokter-psikiater.svg';
 import ILDokterUmum from './ic-dokter-umum.svg';
 
+import BackgroundHospital from './background-hospital.png';
+
 export {
   ILLogo,
   ILGetstarted,
@@ -15,4 +17,5 @@ export {
   ILDokterObat,
   ILDokterPsikiater,
   ILDokterUmum,
+  BackgroundHospital,
 };

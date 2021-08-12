@@ -8,6 +8,9 @@ import DoctorJohn from './doctor-john.png';
 import News1 from './news-1.png';
 import News2 from './news-2.png';
 import News3 from './news-3.png';
+import Hospital1 from './hospital-1.png';
+import Hospital2 from './hospital-2.png';
+import Hospital3 from './hospital-3.png';
 
 export {
   UserShayna1,
@@ -20,4 +23,7 @@ export {
   News1,
   News2,
   News3,
+  Hospital1,
+  Hospital2,
+  Hospital3,
 };
