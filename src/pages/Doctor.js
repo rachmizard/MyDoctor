@@ -14,33 +14,37 @@ export default function Doctor() {
     <View style={styles.page}>
       <View style={styles.content}>
         <ScrollView showsVerticalScrollIndicator={false}>
-          <Gap height={30} />
-          <HomeProfile />
-          <Text style={styles.welcome}>
-            Mau konsultasi dengan siapa hari ini?
-          </Text>
+          <View style={styles.wrapperSection}>
+            <Gap height={30} />
+            <HomeProfile />
+            <Text style={styles.welcome}>
+              Mau konsultasi dengan siapa hari ini?
+            </Text>
+          </View>
           <View style={styles.wrapperScroll}>
             <ScrollView
               horizontal
               showsHorizontalScrollIndicator={false}
               contentContainerStyle={styles.category}>
-              <Gap width={16} />
+              <Gap width={32} />
               <DoctorCategory />
               <DoctorCategory />
               <DoctorCategory />
               <DoctorCategory />
-              <Gap width={6} />
+              <Gap width={22} />
             </ScrollView>
           </View>
-          <Text style={styles.sectionLabel}>Top Rated Doctors</Text>
-          <RatedDoctor />
-          <RatedDoctor />
-          <RatedDoctor />
-          <Text style={styles.sectionLabel}>Good News</Text>
-          <NewsItem />
-          <NewsItem />
-          <NewsItem />
-          <Gap height={30} />
+          <View style={styles.wrapperSection}>
+            <Text style={styles.sectionLabel}>Top Rated Doctors</Text>
+            <RatedDoctor />
+            <RatedDoctor />
+            <RatedDoctor />
+            <Text style={styles.sectionLabel}>Good News</Text>
+            <NewsItem />
+            <NewsItem />
+            <NewsItem />
+            <Gap height={30} />
+          </View>
         </ScrollView>
       </View>
     </View>
@@ -54,7 +58,6 @@ const styles = StyleSheet.create({
   },
   content: {
     flex: 1,
-    paddingHorizontal: 16,
     backgroundColor: colors.white,
     borderBottomLeftRadius: 20,
     borderBottomRightRadius: 20,
@@ -79,5 +82,8 @@ const styles = StyleSheet.create({
   },
   wrapperScroll: {
     marginHorizontal: -16,
+  },
+  wrapperSection: {
+    paddingHorizontal: 16,
   },
 });

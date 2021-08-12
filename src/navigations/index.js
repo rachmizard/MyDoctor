@@ -30,7 +30,7 @@ const MainApp = () => {
 
 export default function Navigations() {
   return (
-    <Stack.Navigator initialRouteName="MainApp">
+    <Stack.Navigator initialRouteName="Splash">
       <Stack.Screen
         name="Splash"
         component={SplashPage}
