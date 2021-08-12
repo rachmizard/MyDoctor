@@ -2,6 +2,7 @@ import {ListMessage} from 'components';
 import React from 'react';
 import {ScrollView, StyleSheet, Text, View} from 'react-native';
 import {colors, fonts} from 'utils';
+import {JSONDummyData} from 'mocks';
 
 export default function Messages() {
   return (
@@ -9,9 +10,16 @@ export default function Messages() {
       <View style={styles.content}>
         <Text style={styles.title}>Messages</Text>
         <ScrollView showsVerticalScrollIndicator={false}>
-          <ListMessage />
-          <ListMessage />
-          <ListMessage />
+          {JSONDummyData.messages.map(item => {
+            return (
+              <ListMessage
+                key={item.id}
+                name={item.name}
+                pic={item.pic}
+                message={item.message}
+              />
+            );
+          })}
         </ScrollView>
       </View>
     </View>

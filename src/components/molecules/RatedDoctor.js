@@ -1,22 +1,18 @@
-import {DoctorAlexaRachel, ICStar} from 'assets';
+import {Rating} from 'components/atoms';
 import React from 'react';
 import {Image, StyleSheet, Text, View} from 'react-native';
 import {colors, fonts} from 'utils';
 
-export default function RatedDoctor() {
+export default function RatedDoctor({name, profession, rate, pic}) {
   return (
     <View style={styles.container}>
-      <Image source={DoctorAlexaRachel} style={styles.avatar} />
+      <Image source={pic} style={styles.avatar} />
       <View style={styles.profile}>
-        <Text style={styles.name}>Alexa Rachel</Text>
-        <Text style={styles.profession}>Pediatrician</Text>
+        <Text style={styles.name}>{name}</Text>
+        <Text style={styles.profession}>{profession}</Text>
       </View>
       <View style={styles.rateWrapper}>
-        <ICStar />
-        <ICStar />
-        <ICStar />
-        <ICStar />
-        <ICStar />
+        <Rating count={rate} />
       </View>
     </View>
   );

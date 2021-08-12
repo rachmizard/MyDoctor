@@ -5,6 +5,7 @@ import {
   NewsItem,
   RatedDoctor,
 } from 'components';
+import {JSONDummyData} from 'mocks';
 import React from 'react';
 import {View, Text, StyleSheet, ScrollView} from 'react-native';
 import {colors, fonts} from 'utils';
@@ -27,22 +28,38 @@ export default function Doctor() {
               showsHorizontalScrollIndicator={false}
               contentContainerStyle={styles.category}>
               <Gap width={32} />
-              <DoctorCategory />
-              <DoctorCategory />
-              <DoctorCategory />
-              <DoctorCategory />
+              {JSONDummyData.doctor.categories.map(({id, category}) => {
+                return <DoctorCategory key={id} category={category} />;
+              })}
               <Gap width={22} />
             </ScrollView>
           </View>
           <View style={styles.wrapperSection}>
             <Text style={styles.sectionLabel}>Top Rated Doctors</Text>
-            <RatedDoctor />
-            <RatedDoctor />
-            <RatedDoctor />
+            {JSONDummyData.doctor.ratedDoctors.map(doctor => {
+              return (
+                <RatedDoctor
+                  key={doctor.id}
+                  name={doctor.name}
+                  profession={doctor.profession}
+                  pic={doctor.pic}
+                  rate={doctor.rate}
+                />
+              );
+            })}
+
             <Text style={styles.sectionLabel}>Good News</Text>
-            <NewsItem />
-            <NewsItem />
-            <NewsItem />
+            {JSONDummyData.doctor.news.map(item => {
+              return (
+                <NewsItem
+                  key={item.id}
+                  title={item.title}
+                  createdAt={item.createdAt}
+                  pic={item.pic}
+                />
+              );
+            })}
+
             <Gap height={30} />
           </View>
         </ScrollView>

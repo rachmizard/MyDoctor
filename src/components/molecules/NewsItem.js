@@ -1,18 +1,15 @@
-import {News1} from 'assets';
 import React from 'react';
 import {Image, StyleSheet, Text, View} from 'react-native';
 import {colors, fonts} from 'utils';
 
-export default function NewsItem() {
+export default function NewsItem({title, createdAt, pic}) {
   return (
     <View style={styles.container}>
       <View style={styles.titleWrapper}>
-        <Text style={styles.title}>
-          Is it safe to stay at home during coronavirus?
-        </Text>
-        <Text style={styles.date}>Today</Text>
+        <Text style={styles.title}>{title}</Text>
+        <Text style={styles.date}>{createdAt}</Text>
       </View>
-      <Image source={News1} style={styles.coverImg} />
+      <Image source={pic} style={styles.coverImg} />
     </View>
   );
 }

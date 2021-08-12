@@ -1,5 +1,6 @@
 import {BackgroundHospital} from 'assets';
 import {ListHospital} from 'components';
+import {JSONDummyData} from 'mocks';
 import React from 'react';
 import {
   View,
@@ -11,19 +12,29 @@ import {
 import {colors, fonts} from 'utils';
 
 export default function Hospitals() {
+  const totalNearbyHospitals = JSONDummyData.hospitals.length;
+
   return (
     <View style={styles.page}>
       <ImageBackground source={BackgroundHospital} style={styles.background}>
         <View style={styles.titleWrapper}>
           <Text style={styles.title}>Nearby Hospitals</Text>
-          <Text style={styles.subheading}>3 tersedia</Text>
+          <Text style={styles.subheading}>{totalNearbyHospitals} tersedia</Text>
         </View>
       </ImageBackground>
       <View style={styles.content}>
         <ScrollView showsVerticalScrollIndicator={false}>
-          <ListHospital />
-          <ListHospital />
-          <ListHospital />
+          {JSONDummyData.hospitals.map(item => {
+            return (
+              <ListHospital
+                key={item.id}
+                title={item.title}
+                category={item.category}
+                address={item.address}
+                pic={item.pic}
+              />
+            );
+          })}
         </ScrollView>
       </View>
     </View>

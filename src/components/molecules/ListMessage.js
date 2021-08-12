@@ -1,18 +1,15 @@
 import React from 'react';
 import {Image, StyleSheet, Text, View} from 'react-native';
-import {DoctorAlexanderJannie} from 'assets';
 import {colors, fonts} from 'utils';
 
-export default function ListMessage() {
+export default function ListMessage({pic, name, message}) {
   return (
     <View style={styles.messageWrapper}>
       <View style={styles.messageItem}>
-        <Image source={DoctorAlexanderJannie} style={styles.avatar} />
+        <Image source={pic} style={styles.avatar} />
         <View>
-          <Text style={styles.name}>Alexander Jannie</Text>
-          <Text style={styles.chatText}>
-            Baik ibu, terima kasih banyak atas wakt...
-          </Text>
+          <Text style={styles.name}>{name}</Text>
+          <Text style={styles.chatText}>{message}</Text>
         </View>
       </View>
     </View>
