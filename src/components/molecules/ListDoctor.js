@@ -1,24 +1,26 @@
 import {ICChevronRight} from 'assets';
 import React from 'react';
-import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {
+  Image,
+  StyleSheet,
+  Text,
+  TouchableWithoutFeedback,
+  View,
+} from 'react-native';
 import {colors, fonts} from 'utils';
 
 export default function ListDoctor({pic, name, desc, iconNext, onPress}) {
   return (
-    <View style={styles.messageWrapper}>
+    <TouchableWithoutFeedback style={styles.messageWrapper} onPress={onPress}>
       <View style={styles.messageItem}>
         <Image source={pic} style={styles.avatar} />
         <View style={styles.info}>
           <Text style={styles.name}>{name}</Text>
           <Text style={styles.chatText}>{desc}</Text>
         </View>
-        {iconNext && (
-          <TouchableOpacity onPress={onPress} style={styles.iconNext}>
-            <ICChevronRight />
-          </TouchableOpacity>
-        )}
+        {iconNext && <ICChevronRight style={styles.iconNext} />}
       </View>
-    </View>
+    </TouchableWithoutFeedback>
   );
 }
 

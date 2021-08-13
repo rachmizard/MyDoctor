@@ -11,8 +11,9 @@ import {
   MessagesPage,
   HospitalsPage,
   ChooseDoctorPage,
+  ChattingPage,
 } from 'pages';
-import {BottomNavigator, Header} from 'components';
+import {BottomNavigator, Header, HeaderChat} from 'components';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -77,6 +78,15 @@ export default function Navigations() {
           animation: 'slide_from_right',
           headerTitle: 'Pilih Dokter Anak',
           header: props => <Header type="dark" {...props} />,
+        }}
+      />
+      <Stack.Screen
+        name="Chatting"
+        component={ChattingPage}
+        options={{
+          animation: 'slide_from_right',
+          headerTitle: 'Nairobi Putri Hayza',
+          header: props => <HeaderChat type="dark-chat-profile" {...props} />,
         }}
       />
     </Stack.Navigator>

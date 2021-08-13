@@ -7,6 +7,7 @@ import DoctorPage from './Doctor';
 import MessagesPage from './Messages';
 import HospitalsPage from './Hospitals';
 import ChooseDoctorPage from './ChooseDoctor';
+import ChattingPage from './Chatting';
 
 export {
   SplashPage,
@@ -18,4 +19,5 @@ export {
   MessagesPage,
   HospitalsPage,
   ChooseDoctorPage,
+  ChattingPage,
 };
