@@ -1,5 +1,5 @@
 import {DoctorNairobi, ICBackLight} from 'assets';
-import {IconButton} from 'components';
+import {IconButton} from '../atoms';
 import React from 'react';
 import {Image, StyleSheet, Text, View} from 'react-native';
 import {colors, fonts} from 'utils';

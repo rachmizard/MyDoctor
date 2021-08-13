@@ -2,7 +2,7 @@ import React from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 import {colors, fonts} from 'utils';
 
-export default function isMe({message, pic, createdAt}) {
+export default function IsMe({message, createdAt}) {
   return (
     <View style={styles.container}>
       <View style={styles.chatWrapper}>

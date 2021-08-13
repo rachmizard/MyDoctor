@@ -1,5 +1,6 @@
 import React from 'react';
-import {Other, IsMe} from 'components';
+import IsMe from './IsMe';
+import Other from './Other';
 
 export default function ChatItem({message, pic, createdAt, me}) {
   if (!me) {

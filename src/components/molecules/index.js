@@ -8,7 +8,7 @@ import NewsItem from './NewsItem';
 import ListDoctor from './ListDoctor';
 import ListHospital from './ListHospital';
 import ChatItem from './ChatItem';
-import IsMe from './isMe';
+import IsMe from './IsMe';
 import Other from './Other';
 
 export {
