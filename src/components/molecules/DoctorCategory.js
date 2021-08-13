@@ -1,12 +1,12 @@
-import React from 'react';
-import {StyleSheet, Text, View} from 'react-native';
-import {colors, fonts} from 'utils';
 import {
   ILDokterAnak,
   ILDokterObat,
   ILDokterPsikiater,
   ILDokterUmum,
 } from 'assets';
+import React from 'react';
+import {StyleSheet, Text, TouchableOpacity} from 'react-native';
+import {colors, fonts} from 'utils';
 
 const CategoryIcon = ({category, style}) => {
   if (category === 'dokter umum') {
@@ -24,13 +24,13 @@ const CategoryIcon = ({category, style}) => {
   return <ILDokterUmum style={style} />;
 };
 
-export default function DoctorCategory({category}) {
+export default function DoctorCategory({category, onPress}) {
   return (
-    <View style={styles.container}>
+    <TouchableOpacity style={styles.container} onPress={onPress}>
       <CategoryIcon category={category} style={styles.illustration} />
       <Text style={styles.text(300)}>Saya Butuh</Text>
       <Text style={styles.text(600)}>{category}</Text>
-    </View>
+    </TouchableOpacity>
   );
 }
 

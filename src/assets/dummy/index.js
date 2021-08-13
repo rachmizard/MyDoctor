@@ -5,6 +5,8 @@ import DoctorPoeMinn from './doctor-poe-minn.png';
 import DoctorAlexanderJannie from './doctor-alexander-jannie.png';
 import DoctorNairobi from './doctor-nairobi.png';
 import DoctorJohn from './doctor-john.png';
+import DoctorJames from './doctor-james-rivillia.png';
+import DoctorLiu from './doctor-liu.png';
 import News1 from './news-1.png';
 import News2 from './news-2.png';
 import News3 from './news-3.png';
@@ -20,6 +22,8 @@ export {
   DoctorAlexanderJannie,
   DoctorNairobi,
   DoctorJohn,
+  DoctorJames,
+  DoctorLiu,
   News1,
   News2,
   News3,

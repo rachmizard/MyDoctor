@@ -1,16 +1,22 @@
+import {ICChevronRight} from 'assets';
 import React from 'react';
-import {Image, StyleSheet, Text, View} from 'react-native';
+import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import {colors, fonts} from 'utils';
 
-export default function ListMessage({pic, name, message}) {
+export default function ListDoctor({pic, name, desc, iconNext, onPress}) {
   return (
     <View style={styles.messageWrapper}>
       <View style={styles.messageItem}>
         <Image source={pic} style={styles.avatar} />
-        <View>
+        <View style={styles.info}>
           <Text style={styles.name}>{name}</Text>
-          <Text style={styles.chatText}>{message}</Text>
+          <Text style={styles.chatText}>{desc}</Text>
         </View>
+        {iconNext && (
+          <TouchableOpacity onPress={onPress} style={styles.iconNext}>
+            <ICChevronRight />
+          </TouchableOpacity>
+        )}
       </View>
     </View>
   );
@@ -24,6 +30,8 @@ const styles = StyleSheet.create({
   messageItem: {
     flexDirection: 'row',
     padding: 16,
+    justifyContent: 'space-between',
+    alignItems: 'center',
   },
   avatar: {
     marginRight: 12,
@@ -37,9 +45,15 @@ const styles = StyleSheet.create({
     fontSize: 16,
     marginBottom: 2,
   },
+  info: {
+    flex: 1,
+  },
   chatText: {
     fontFamily: fonts.primary.normal,
     color: colors.text.secondary,
     fontSize: 14,
+  },
+  iconNext: {
+    padding: 5,
   },
 });

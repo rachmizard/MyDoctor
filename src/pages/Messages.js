@@ -1,8 +1,8 @@
-import {ListMessage} from 'components';
+import {ListDoctor} from 'components';
+import {JSONDummyData} from 'mocks';
 import React from 'react';
 import {ScrollView, StyleSheet, Text, View} from 'react-native';
 import {colors, fonts} from 'utils';
-import {JSONDummyData} from 'mocks';
 
 export default function Messages() {
   return (
@@ -12,11 +12,11 @@ export default function Messages() {
         <ScrollView showsVerticalScrollIndicator={false}>
           {JSONDummyData.messages.map(item => {
             return (
-              <ListMessage
+              <ListDoctor
                 key={item.id}
                 name={item.name}
                 pic={item.pic}
-                message={item.message}
+                desc={item.message}
               />
             );
           })}

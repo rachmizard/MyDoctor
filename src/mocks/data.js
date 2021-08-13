@@ -1,7 +1,9 @@
 import {
   DoctorAlexanderJannie,
   DoctorAlexaRachel,
+  DoctorJames,
   DoctorJohn,
+  DoctorLiu,
   DoctorNairobi,
   DoctorPoeMinn,
   DoctorSunnyFrank,
@@ -118,6 +120,38 @@ const data = {
       title: 'Tingkatan Paling Atas',
       address: 'Jln. Surya Permata 39',
       pic: Hospital3,
+    },
+  ],
+  chooseDoctors: [
+    {
+      id: 1,
+      name: 'Alexander Jannie',
+      gender: 'Wanita',
+      pic: DoctorAlexanderJannie,
+    },
+    {
+      id: 2,
+      name: 'John McParker Steve',
+      gender: 'Pria',
+      pic: DoctorJohn,
+    },
+    {
+      id: 3,
+      name: 'Nairobi Putri Hayza',
+      gender: 'Wanita',
+      pic: DoctorNairobi,
+    },
+    {
+      id: 4,
+      name: 'James Rivillia',
+      gender: 'Pria',
+      pic: DoctorJames,
+    },
+    {
+      id: 5,
+      name: 'Liu Yue Tian Park',
+      gender: 'Wanita',
+      pic: DoctorLiu,
     },
   ],
 };

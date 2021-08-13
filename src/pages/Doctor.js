@@ -10,7 +10,7 @@ import React from 'react';
 import {View, Text, StyleSheet, ScrollView} from 'react-native';
 import {colors, fonts} from 'utils';
 
-export default function Doctor() {
+export default function Doctor({navigation}) {
   return (
     <View style={styles.page}>
       <View style={styles.content}>
@@ -29,7 +29,13 @@ export default function Doctor() {
               contentContainerStyle={styles.category}>
               <Gap width={32} />
               {JSONDummyData.doctor.categories.map(({id, category}) => {
-                return <DoctorCategory key={id} category={category} />;
+                return (
+                  <DoctorCategory
+                    key={id}
+                    category={category}
+                    onPress={() => navigation.navigate('ChooseDoctor')}
+                  />
+                );
               })}
               <Gap width={22} />
             </ScrollView>

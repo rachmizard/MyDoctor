@@ -6,6 +6,7 @@ import UploadPhotoPage from './UploadPhoto';
 import DoctorPage from './Doctor';
 import MessagesPage from './Messages';
 import HospitalsPage from './Hospitals';
+import ChooseDoctorPage from './ChooseDoctor';
 
 export {
   SplashPage,
@@ -16,4 +17,5 @@ export {
   DoctorPage,
   MessagesPage,
   HospitalsPage,
+  ChooseDoctorPage,
 };

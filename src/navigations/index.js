@@ -10,6 +10,7 @@ import {
   DoctorPage,
   MessagesPage,
   HospitalsPage,
+  ChooseDoctorPage,
 } from 'pages';
 import {BottomNavigator, Header} from 'components';
 
@@ -65,7 +66,18 @@ export default function Navigations() {
       <Stack.Screen
         name="MainApp"
         component={MainApp}
-        options={{headerShown: false}}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <Stack.Screen
+        name="ChooseDoctor"
+        component={ChooseDoctorPage}
+        options={{
+          animation: 'slide_from_right',
+          headerTitle: 'Pilih Dokter Anak',
+          header: props => <Header type="dark" {...props} />,
+        }}
       />
     </Stack.Navigator>
   );

@@ -19,7 +19,12 @@ export default function Splash({navigation}) {
 }
 
 const styles = StyleSheet.create({
-  page: {flex: 1, justifyContent: 'center', alignItems: 'center'},
+  page: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: colors.white,
+  },
   title: {
     fontSize: 20,
     fontWeight: '600',
