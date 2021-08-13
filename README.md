@@ -31,5 +31,5 @@ git clone git@github.com:rachmizard/MyDoctor.git
 npm install
 cd MyDoctor
 npm start
-npm run android
+npm run android or npm run ios
 ```
