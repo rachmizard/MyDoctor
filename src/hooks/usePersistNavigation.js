@@ -37,7 +37,9 @@ function usePersistNavigation() {
     initialState,
     isReady,
     getPersistenceKey: PERSISTENCE_KEY,
-    setAsyncStorage: AsyncStorage.setItem,
+    setAsyncStorage: async item => {
+      await AsyncStorage.setItem(item);
+    },
   };
 }
 
