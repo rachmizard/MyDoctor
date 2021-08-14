@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import PropTypes from 'prop-types';
 import {StyleSheet, Text, TextInput, View} from 'react-native';
 import {colors, fonts} from 'utils';
@@ -11,13 +11,26 @@ export default function Input({
   keyboardType,
   secureTextEntry,
 }) {
+  const [isFocus, setIsFocus] = useState(false);
+
+  const handleFocus = () => {
+    setIsFocus(true);
+  };
+
+  const handleBlur = () => {
+    setIsFocus(false);
+  };
+
   return (
     <View>
       <Text style={styles.label}>{label}</Text>
       <TextInput
+        onFocus={handleFocus}
+        onBlur={handleBlur}
         style={StyleSheet.flatten([
           styles.input,
-          disabled ? styles.disabledInput : null,
+          disabled && styles.disabledInput,
+          isFocus && styles.focusInput,
         ])}
         editable={!disabled}
         value={value}
@@ -42,6 +55,10 @@ const styles = StyleSheet.create({
   disabledInput: {
     backgroundColor: colors.disable,
     color: colors.text.disable,
+  },
+  focusInput: {
+    borderWidth: 1,
+    borderColor: colors.tertiary,
   },
   label: {
     fontFamily: fonts.primary[400],

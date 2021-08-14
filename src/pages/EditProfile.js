@@ -1,10 +1,22 @@
 import {UserShayna2} from 'assets';
 import {Avatar, Button, Gap, Input} from 'components';
+import {useForm} from 'hooks';
 import React from 'react';
 import {ScrollView, StyleSheet, View} from 'react-native';
 import {colors} from 'utils';
 
 export default function EditProfile() {
+  const [getFields, setField] = useForm({
+    fullName: 'Shayna Melinda',
+    job: 'Product Designer',
+    email: 'ashayna@google.com',
+    password: 'password',
+  });
+
+  const handleSaveProfile = () => {
+    //  update post
+  };
+
   return (
     <View style={styles.page}>
       <ScrollView showsVerticalScrollIndicator={false}>
@@ -14,15 +26,28 @@ export default function EditProfile() {
           profession="Product Designer"
         />
         <View style={styles.form}>
-          <Input label="Full Name" value="Shayna Melinnda" />
+          <Input
+            label="Full Name"
+            value={getFields.fullName}
+            onChangeText={text => setField('fullName', text)}
+          />
           <Gap height={24} />
-          <Input label="Pekerjaan" value="Product Designer" />
+          <Input
+            label="Pekerjaan"
+            value={getFields.job}
+            onChangeText={text => setField('job', text)}
+          />
           <Gap height={24} />
-          <Input label="Email Address" value="ashayna@google.com" disabled />
+          <Input label="Email Address" value={getFields.email} disabled />
           <Gap height={24} />
-          <Input label="Password" value="password" secureTextEntry />
+          <Input
+            label="Password"
+            value={getFields.password}
+            secureTextEntry
+            onChangeText={text => setField('password', text)}
+          />
           <Gap height={40} />
-          <Button title="Save Profile" />
+          <Button onPress={handleSaveProfile} title="Save Profile" />
         </View>
       </ScrollView>
     </View>
