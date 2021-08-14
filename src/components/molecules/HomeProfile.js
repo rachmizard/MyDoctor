@@ -1,12 +1,20 @@
 import {UserShayna1} from 'assets';
 import React from 'react';
-import {Image, StyleSheet, Text, View} from 'react-native';
+import {
+  Image,
+  StyleSheet,
+  Text,
+  TouchableWithoutFeedback,
+  View,
+} from 'react-native';
 import {colors, fonts} from 'utils';
 
-export default function HomeProfile() {
+export default function HomeProfile({onPress}) {
   return (
     <View style={styles.container}>
-      <Image source={UserShayna1} style={styles.avatar} />
+      <TouchableWithoutFeedback onPress={onPress}>
+        <Image source={UserShayna1} style={styles.avatar} />
+      </TouchableWithoutFeedback>
       <View>
         <Text style={styles.name}>Shayna Melinda</Text>
         <Text style={styles.profession}>Product Designer</Text>

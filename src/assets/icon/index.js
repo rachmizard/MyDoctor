@@ -11,6 +11,10 @@ import ICStar from './ic-star.svg';
 import ICChevronRight from './ic-chevron-right.svg';
 import ICSend from './ic-send.svg';
 import ICSendDisable from './ic-send-disable.svg';
+import ICAccountCircleOutline from './ic-account-circle-outline.svg';
+import ICTranslate from './ic-translate.svg';
+import ICStarOutline from './ic-star-outline.svg';
+import ICDescription from './ic-description.svg';
 
 export {
   ICBackDark,
@@ -26,4 +30,8 @@ export {
   ICChevronRight,
   ICSend,
   ICSendDisable,
+  ICAccountCircleOutline,
+  ICTranslate,
+  ICStarOutline,
+  ICDescription,
 };

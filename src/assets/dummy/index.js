@@ -1,4 +1,5 @@
 import UserShayna1 from './user-shayna-1.png';
+import UserShayna2 from './user-shayna-2.png';
 import DoctorAlexaRachel from './doctor-alexa-rachel.png';
 import DoctorSunnyFrank from './doctor-sunny-frank.png';
 import DoctorPoeMinn from './doctor-poe-minn.png';
@@ -16,6 +17,7 @@ import Hospital3 from './hospital-3.png';
 
 export {
   UserShayna1,
+  UserShayna2,
   DoctorAlexaRachel,
   DoctorSunnyFrank,
   DoctorPoeMinn,

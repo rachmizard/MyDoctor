@@ -12,6 +12,7 @@ import {
   HospitalsPage,
   ChooseDoctorPage,
   ChattingPage,
+  UserProfilePage,
 } from 'pages';
 import {BottomNavigator, Header, HeaderChat} from 'components';
 
@@ -87,6 +88,15 @@ export default function Navigations() {
           animation: 'slide_from_right',
           headerTitle: 'Nairobi Putri Hayza',
           header: props => <HeaderChat type="dark-chat-profile" {...props} />,
+        }}
+      />
+      <Stack.Screen
+        name="UserProfile"
+        component={UserProfilePage}
+        options={{
+          animation: 'slide_from_right',
+          headerTitle: 'Profile',
+          header: props => <Header {...props} />,
         }}
       />
     </Stack.Navigator>
