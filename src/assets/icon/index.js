@@ -9,6 +9,8 @@ import ICMessagesActive from './ic-messages-active.svg';
 import ICMessages from './ic-messages.svg';
 import ICStar from './ic-star.svg';
 import ICChevronRight from './ic-chevron-right.svg';
+import ICSend from './ic-send.svg';
+import ICSendDisable from './ic-send-disable.svg';
 
 export {
   ICBackDark,
@@ -22,4 +24,6 @@ export {
   ICHospitalActive,
   ICStar,
   ICChevronRight,
+  ICSend,
+  ICSendDisable,
 };

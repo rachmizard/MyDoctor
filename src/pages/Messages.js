@@ -4,7 +4,7 @@ import React from 'react';
 import {ScrollView, StyleSheet, Text, View} from 'react-native';
 import {colors, fonts} from 'utils';
 
-export default function Messages() {
+export default function Messages({navigation}) {
   return (
     <View style={styles.page}>
       <View style={styles.content}>
@@ -17,6 +17,7 @@ export default function Messages() {
                 name={item.name}
                 pic={item.pic}
                 desc={item.message}
+                onPress={() => navigation.navigate('Chatting')}
               />
             );
           })}
