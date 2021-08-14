@@ -12,6 +12,7 @@ import IsMe from './IsMe';
 import Other from './Other';
 import InputChat from './InputChat';
 import ProfileItem from './ProfileItem';
+import Avatar from './Avatar';
 
 export {
   Header,
@@ -28,4 +29,5 @@ export {
   Other,
   InputChat,
   ProfileItem,
+  Avatar,
 };

@@ -15,6 +15,7 @@ import ICAccountCircleOutline from './ic-account-circle-outline.svg';
 import ICTranslate from './ic-translate.svg';
 import ICStarOutline from './ic-star-outline.svg';
 import ICDescription from './ic-description.svg';
+import ICClose from './ic-close.svg';
 
 export {
   ICBackDark,
@@ -34,4 +35,5 @@ export {
   ICTranslate,
   ICStarOutline,
   ICDescription,
+  ICClose,
 };

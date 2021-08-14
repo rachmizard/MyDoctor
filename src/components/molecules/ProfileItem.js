@@ -1,18 +1,20 @@
 import {ICChevronRight} from 'assets';
 import React from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import {colors, fonts} from 'utils';
 
-export default function ProfileItem({icon, infoTitle, infoDesc}) {
+export default function ProfileItem({icon, infoTitle, infoDesc, onPress}) {
   return (
-    <View style={styles.container}>
-      {icon}
-      <View style={styles.info}>
-        <Text style={styles.infoTitle}>{infoTitle}</Text>
-        <Text style={styles.infoDesc}>{infoDesc}</Text>
+    <TouchableOpacity activeOpacity={0.7} onPress={onPress}>
+      <View style={styles.container}>
+        {icon}
+        <View style={styles.info}>
+          <Text style={styles.infoTitle}>{infoTitle}</Text>
+          <Text style={styles.infoDesc}>{infoDesc}</Text>
+        </View>
+        <ICChevronRight />
       </View>
-      <ICChevronRight />
-    </View>
+    </TouchableOpacity>
   );
 }
 

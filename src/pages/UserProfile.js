@@ -5,18 +5,16 @@ import {
   ICTranslate,
   UserShayna2,
 } from 'assets';
-import {ProfileItem} from 'components';
+import {Avatar, ProfileItem} from 'components';
 import React from 'react';
-import {Image, StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, Text, View} from 'react-native';
 import {colors, fonts} from 'utils';
 
-export default function UserProfile() {
+export default function UserProfile({navigation}) {
   return (
     <View style={styles.page}>
       <View style={styles.profile}>
-        <View style={styles.avatarWrapper}>
-          <Image source={UserShayna2} style={styles.avatar} />
-        </View>
+        <Avatar pic={UserShayna2} />
         <Text style={styles.name}>Shayna Melinda</Text>
         <Text style={styles.profession}>Product Designer</Text>
       </View>
@@ -25,6 +23,7 @@ export default function UserProfile() {
           icon={<ICAccountCircleOutline />}
           infoTitle="Edit Profile"
           infoDesc="Last updated yesterday"
+          onPress={() => navigation.navigate('EditProfile')}
         />
         <ProfileItem
           icon={<ICTranslate />}
@@ -55,18 +54,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     marginTop: 40,
-  },
-  avatarWrapper: {
-    padding: 10,
-    borderColor: colors.border,
-    borderWidth: 1,
-    marginBottom: 16,
-    borderRadius: 130 / 2,
-  },
-  avatar: {
-    width: 110,
-    height: 110,
-    borderRadius: 110 / 2,
   },
   name: {
     fontFamily: fonts.primary[600],
