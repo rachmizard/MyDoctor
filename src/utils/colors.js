@@ -23,6 +23,7 @@ export const colors = {
     secondary: mainColors.grey1,
     menuInactive: mainColors.dark2,
     menuActive: mainColors.green1,
+    disable: mainColors.grey4,
   },
   button: {
     primary: {

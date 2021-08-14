@@ -7,17 +7,17 @@ import {
 } from 'assets';
 import {Avatar, ProfileItem} from 'components';
 import React from 'react';
-import {StyleSheet, Text, View} from 'react-native';
-import {colors, fonts} from 'utils';
+import {StyleSheet, View} from 'react-native';
+import {colors} from 'utils';
 
 export default function UserProfile({navigation}) {
   return (
     <View style={styles.page}>
-      <View style={styles.profile}>
-        <Avatar pic={UserShayna2} />
-        <Text style={styles.name}>Shayna Melinda</Text>
-        <Text style={styles.profession}>Product Designer</Text>
-      </View>
+      <Avatar
+        pic={UserShayna2}
+        name="Shayna Melinda"
+        profession="Product Designer"
+      />
       <View style={styles.items}>
         <ProfileItem
           icon={<ICAccountCircleOutline />}
@@ -49,21 +49,6 @@ const styles = StyleSheet.create({
   page: {
     flex: 1,
     backgroundColor: colors.white,
-  },
-  profile: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginTop: 40,
-  },
-  name: {
-    fontFamily: fonts.primary[600],
-    color: colors.text.primary,
-    fontSize: 20,
-  },
-  profession: {
-    fontFamily: fonts.primary.normal,
-    color: colors.text.secondary,
-    fontSize: 16,
   },
   items: {
     flex: 1,
