@@ -4,7 +4,10 @@ import {colors, fonts} from 'utils';
 
 export default function Button({title, type, onPress}) {
   return (
-    <TouchableOpacity style={styles.container(type)} onPress={onPress}>
+    <TouchableOpacity
+      style={styles.container(type)}
+      onPress={onPress}
+      activeOpacity={0.8}>
       <Text style={styles.text(type)}>{title}</Text>
     </TouchableOpacity>
   );

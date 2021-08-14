@@ -1,20 +1,22 @@
 import {Rating} from 'components/atoms';
 import React from 'react';
-import {Image, StyleSheet, Text, View} from 'react-native';
+import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import {colors, fonts} from 'utils';
 
-export default function RatedDoctor({name, profession, rate, pic}) {
+export default function RatedDoctor({name, profession, rate, pic, onPress}) {
   return (
-    <View style={styles.container}>
-      <Image source={pic} style={styles.avatar} />
-      <View style={styles.profile}>
-        <Text style={styles.name}>{name}</Text>
-        <Text style={styles.profession}>{profession}</Text>
+    <TouchableOpacity onPress={onPress} activeOpacity={0.7}>
+      <View style={styles.container}>
+        <Image source={pic} style={styles.avatar} />
+        <View style={styles.profile}>
+          <Text style={styles.name}>{name}</Text>
+          <Text style={styles.profession}>{profession}</Text>
+        </View>
+        <View style={styles.rateWrapper}>
+          <Rating count={rate} />
+        </View>
       </View>
-      <View style={styles.rateWrapper}>
-        <Rating count={rate} />
-      </View>
-    </View>
+    </TouchableOpacity>
   );
 }
 

@@ -10,6 +10,7 @@ import ChooseDoctorPage from './ChooseDoctor';
 import ChattingPage from './Chatting';
 import UserProfilePage from './UserProfile';
 import EditProfilePage from './EditProfile';
+import DoctorProfilePage from './DoctorProfile';
 
 export {
   SplashPage,
@@ -24,4 +25,5 @@ export {
   ChattingPage,
   UserProfilePage,
   EditProfilePage,
+  DoctorProfilePage,
 };

@@ -50,6 +50,7 @@ export default function Doctor({navigation}) {
                   profession={doctor.profession}
                   pic={doctor.pic}
                   rate={doctor.rate}
+                  onPress={() => navigation.navigate('DoctorProfile')}
                 />
               );
             })}

@@ -5,7 +5,7 @@ import {
   ICTranslate,
   UserShayna2,
 } from 'assets';
-import {Avatar, ProfileItem} from 'components';
+import {Avatar, Button, Gap, ProfileItem} from 'components';
 import React from 'react';
 import {StyleSheet, View} from 'react-native';
 import {colors} from 'utils';
@@ -41,6 +41,10 @@ export default function UserProfile({navigation}) {
           infoDesc="Read our guidelines"
         />
       </View>
+      <Gap height={30} />
+      <View style={styles.buttonWrapper}>
+        <Button title="Sign Out" onPress={() => navigation.replace('Login')} />
+      </View>
     </View>
   );
 }
@@ -51,7 +55,9 @@ const styles = StyleSheet.create({
     backgroundColor: colors.white,
   },
   items: {
-    flex: 1,
     marginTop: 30,
+  },
+  buttonWrapper: {
+    paddingHorizontal: 40,
   },
 });

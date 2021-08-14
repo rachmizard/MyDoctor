@@ -14,6 +14,7 @@ import {
   ChattingPage,
   UserProfilePage,
   EditProfilePage,
+  DoctorProfilePage,
 } from 'pages';
 import {BottomNavigator, Header, HeaderChat} from 'components';
 
@@ -106,6 +107,15 @@ export default function Navigations() {
         options={{
           animation: 'slide_from_right',
           headerTitle: 'Edit Akun',
+          header: props => <Header {...props} />,
+        }}
+      />
+      <Stack.Screen
+        name="DoctorProfile"
+        component={DoctorProfilePage}
+        options={{
+          animation: 'slide_from_right',
+          headerTitle: 'Profile',
           header: props => <Header {...props} />,
         }}
       />
