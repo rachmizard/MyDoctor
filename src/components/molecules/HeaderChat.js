@@ -1,7 +1,7 @@
 import {DoctorNairobi, ICBackLight} from 'assets';
 import {IconButton} from '../atoms';
 import React from 'react';
-import {Image, StyleSheet, Text, View} from 'react-native';
+import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import {colors, fonts} from 'utils';
 
 export default function HeaderChat({options, navigation}) {
@@ -12,7 +12,9 @@ export default function HeaderChat({options, navigation}) {
         <Text style={styles.title}>{options.headerTitle}</Text>
         <Text style={styles.profession}>{options.headerTitle}</Text>
       </View>
-      <Image source={DoctorNairobi} style={styles.avatar} />
+      <TouchableOpacity onPress={() => navigation.navigate('DoctorProfile')}>
+        <Image source={DoctorNairobi} style={styles.avatar} />
+      </TouchableOpacity>
     </View>
   );
 }

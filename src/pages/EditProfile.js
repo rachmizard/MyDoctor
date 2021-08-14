@@ -24,6 +24,7 @@ export default function EditProfile() {
           pic={UserShayna2}
           name="Shayna Melinda"
           profession="Product Designer"
+          editable
         />
         <View style={styles.form}>
           <Input

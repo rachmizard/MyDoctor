@@ -4,13 +4,15 @@ import React from 'react';
 import {StyleSheet, View} from 'react-native';
 import {colors} from 'utils';
 
-export default function DoctorProfile() {
+export default function DoctorProfile({navigation}) {
   return (
     <View style={styles.page}>
       <Avatar
         pic={DoctorNairobi}
         name="Nairobi Putri Hayza"
         profession="Dokter Anak"
+        gender="female"
+        withGender
       />
       <View style={styles.items}>
         <ProfileItemDoctor
@@ -29,7 +31,10 @@ export default function DoctorProfile() {
       </View>
       <Gap height={23} />
       <View style={styles.buttonWrapper}>
-        <Button title="Start Consultation" />
+        <Button
+          title="Start Consultation"
+          onPress={() => navigation.navigate('Chatting')}
+        />
       </View>
     </View>
   );

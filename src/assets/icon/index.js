@@ -16,6 +16,8 @@ import ICTranslate from './ic-translate.svg';
 import ICStarOutline from './ic-star-outline.svg';
 import ICDescription from './ic-description.svg';
 import ICClose from './ic-close.svg';
+import ICGenderMale from './ic-gender-male.svg';
+import ICGenderFemale from './ic-gender-female.svg';
 
 export {
   ICBackDark,
@@ -36,4 +38,6 @@ export {
   ICStarOutline,
   ICDescription,
   ICClose,
+  ICGenderMale,
+  ICGenderFemale,
 };

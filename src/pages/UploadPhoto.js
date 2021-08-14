@@ -4,7 +4,7 @@ import React from 'react';
 import {Image, StyleSheet, Text, View} from 'react-native';
 import {colors, fonts} from 'utils';
 
-export default function UploadPhoto() {
+export default function UploadPhoto({navigation}) {
   return (
     <View style={styles.page}>
       <View style={styles.content}>
@@ -17,9 +17,17 @@ export default function UploadPhoto() {
           <Text style={styles.profession}>Product Designer</Text>
         </View>
         <View>
-          <Button title="Upload and Continue" />
+          <Button
+            title="Upload and Continue"
+            onPress={() => navigation.replace('MainApp')}
+          />
           <Gap height={30} />
-          <Link title="Skip for this" align="center" size={16} />
+          <Link
+            onPress={() => navigation.replace('MainApp')}
+            title="Skip for this"
+            align="center"
+            size={16}
+          />
         </View>
       </View>
     </View>

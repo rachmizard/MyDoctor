@@ -1,20 +1,56 @@
-import {ICClose} from 'assets';
+import {ICClose, ICGenderFemale, ICGenderMale} from 'assets';
 import {IconButton} from 'components/atoms';
 import React from 'react';
 import {Image, StyleSheet, Text, View} from 'react-native';
 import {colors, fonts} from 'utils';
 
-export default function Avatar({pic, name, profession, editable}) {
+export default function Avatar({
+  pic,
+  name,
+  profession,
+  editable,
+  gender,
+  withGender,
+}) {
+  const GenderIcon = () => {
+    if (gender === 'female') {
+      return (
+        <View style={styles.iconWrapper}>
+          <IconButton
+            style={[styles.iconButton, styles.iconFemale]}
+            icon={<ICGenderFemale />}
+          />
+        </View>
+      );
+    }
+    return (
+      <View style={styles.iconWrapper}>
+        <IconButton
+          style={[styles.iconButton, styles.iconMale]}
+          icon={<ICGenderMale />}
+        />
+      </View>
+    );
+  };
+
+  const EditableIcon = () => {
+    return (
+      <View style={styles.iconWrapper}>
+        <IconButton
+          style={[styles.iconButton, styles.normal]}
+          icon={<ICClose />}
+        />
+      </View>
+    );
+  };
+
   return (
     <View style={styles.container}>
       <View style={styles.avatarWrapper}>
         <Image source={pic} style={styles.avatar} />
+        {editable && <EditableIcon />}
+        {gender !== null && withGender && <GenderIcon />}
       </View>
-      {editable && (
-        <View style={styles.iconWrapper}>
-          <IconButton style={styles.iconButton} icon={<ICClose />} />
-        </View>
-      )}
       <Text style={styles.name}>{name}</Text>
       <Text style={styles.profession}>{profession}</Text>
     </View>
@@ -25,7 +61,6 @@ const styles = StyleSheet.create({
   container: {
     alignItems: 'center',
     justifyContent: 'center',
-    position: 'relative',
   },
   avatarWrapper: {
     padding: 10,
@@ -33,6 +68,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     marginBottom: 16,
     borderRadius: 130 / 2,
+    position: 'relative',
   },
   avatar: {
     width: 110,
@@ -44,17 +80,24 @@ const styles = StyleSheet.create({
     backgroundColor: colors.white,
     borderRadius: 40,
     position: 'absolute',
-    bottom: 20,
+    bottom: 0,
     right: 0,
   },
   iconButton: {
-    backgroundColor: colors.button.tertiary.background,
-    color: colors.button.tertiary.text,
     width: 30,
     height: 30,
     borderRadius: 30 / 2,
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  normal: {
+    backgroundColor: colors.button.tertiary.background,
+  },
+  iconMale: {
+    backgroundColor: colors.tertiary,
+  },
+  iconFemale: {
+    backgroundColor: colors.button.tertiary.background,
   },
   name: {
     fontFamily: fonts.primary[600],
