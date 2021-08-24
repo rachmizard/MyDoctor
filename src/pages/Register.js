@@ -1,7 +1,7 @@
 import {Button, Gap, Input} from 'components';
 import React from 'react';
 import {StyleSheet, View} from 'react-native';
-import {colors} from 'utils';
+import {colors, emailReg} from 'utils';
 import {showMessage} from 'react-native-flash-message';
 import {useForm} from 'hooks';
 import {useMutation} from '@apollo/client';
@@ -18,7 +18,7 @@ export default function Register({navigation}) {
   const [signUp, {loading}] = useMutation(SIGN_UP);
 
   const onSubmitSignUp = () => {
-    let reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w\w+)+$/;
+    let reg = emailReg;
 
     if (!fields.fullName) {
       showMessage({
