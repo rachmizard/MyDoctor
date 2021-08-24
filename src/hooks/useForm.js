@@ -19,7 +19,19 @@ function useForm(initialValue = {}) {
     setErrors(Object.keys(formControl).map(err => ({[err]: false})));
   }
 
-  return [formControl, setField, errors, setErrors, clearAllErrors];
+  function clearForm() {
+    setFormControl({});
+    setErrors({});
+  }
+
+  return {
+    fields: formControl,
+    setField,
+    errors,
+    setErrors,
+    clearAllErrors,
+    clearForm,
+  };
 }
 
 export default useForm;

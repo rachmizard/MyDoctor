@@ -4,14 +4,18 @@ import {StyleSheet, View} from 'react-native';
 import {colors} from 'utils';
 import {showMessage} from 'react-native-flash-message';
 import {useForm} from 'hooks';
+import {useMutation} from '@apollo/client';
+import {SIGN_UP} from 'gql/user/user.typeDefs';
 
 export default function Register({navigation}) {
-  const [fields, setFields, errors, setErrors] = useForm({
+  const {fields, setField, errors, setErrors, clearForm} = useForm({
     fullName: '',
     job: '',
     email: '',
     password: '',
   });
+
+  const [signUp, {loading}] = useMutation(SIGN_UP);
 
   const onSubmitSignUp = () => {
     let reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w\w+)+$/;
@@ -51,7 +55,21 @@ export default function Register({navigation}) {
     }
 
     if (!errors.email && !errors.password) {
-      navigation.navigate('UploadPhoto');
+      signUp({variables: fields})
+        .then(res => {
+          clearForm();
+          navigation.navigate('UploadPhoto');
+          showMessage({
+            type: 'success',
+            message: 'Successfully Registered',
+          });
+        })
+        .catch(err => {
+          showMessage({
+            type: 'danger',
+            message: err.message,
+          });
+        });
     }
   };
 
@@ -63,7 +81,7 @@ export default function Register({navigation}) {
           label="Full Name"
           value={fields.fullName}
           onChangeText={value => {
-            setFields('fullName', value);
+            setField('fullName', value);
           }}
         />
         <Gap height={24} />
@@ -72,7 +90,7 @@ export default function Register({navigation}) {
           label="Pekerjaan"
           value={fields.job}
           onChangeText={value => {
-            setFields('job', value);
+            setField('job', value);
           }}
         />
         <Gap height={24} />
@@ -82,7 +100,7 @@ export default function Register({navigation}) {
           value={fields.email}
           hasError={errors.email}
           onChangeText={value => {
-            setFields('email', value);
+            setField('email', value);
           }}
         />
         <Gap height={24} />
@@ -92,11 +110,11 @@ export default function Register({navigation}) {
           hasError={errors.password}
           secureTextEntry
           onChangeText={value => {
-            setFields('password', value);
+            setField('password', value);
           }}
         />
         <Gap height={24} />
-        <Button title="Continue" onPress={onSubmitSignUp} />
+        <Button title="Continue" loading={loading} onPress={onSubmitSignUp} />
       </View>
     </View>
   );
