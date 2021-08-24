@@ -20,6 +20,38 @@ export default function Register({navigation}) {
   const onSubmitSignUp = () => {
     let reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w\w+)+$/;
 
+    if (!fields.fullName) {
+      showMessage({
+        message: 'Maaf, Full Name wajib di isi',
+        type: 'danger',
+      });
+      return setErrors(err => ({
+        ...err,
+        fullName: true,
+      }));
+    } else {
+      setErrors(err => ({
+        ...err,
+        fullName: false,
+      }));
+    }
+
+    if (!fields.job) {
+      showMessage({
+        message: 'Maaf, Job wajib di isi',
+        type: 'danger',
+      });
+      return setErrors(err => ({
+        ...err,
+        job: true,
+      }));
+    } else {
+      setErrors(err => ({
+        ...err,
+        job: false,
+      }));
+    }
+
     if (reg.test(fields.email) === false) {
       setErrors(err => ({
         ...err,
@@ -80,6 +112,7 @@ export default function Register({navigation}) {
           placeholder="Ex: Dwayne Rodrigo"
           label="Full Name"
           value={fields.fullName}
+          hasError={errors.fullName}
           onChangeText={value => {
             setField('fullName', value);
           }}
@@ -89,6 +122,7 @@ export default function Register({navigation}) {
           placeholder="Ex: Software Engineer"
           label="Pekerjaan"
           value={fields.job}
+          hasError={errors.job}
           onChangeText={value => {
             setField('job', value);
           }}

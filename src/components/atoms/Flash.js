@@ -1,7 +1,7 @@
 import React from 'react';
 import {StyleSheet} from 'react-native';
 import FlashMessage from 'react-native-flash-message';
-import {colors, fonts} from 'utils';
+import {fonts} from 'utils';
 
 export default function Flash() {
   return (
