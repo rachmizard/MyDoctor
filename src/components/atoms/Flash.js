@@ -7,7 +7,6 @@ export default function Flash() {
   return (
     <FlashMessage
       position="top"
-      style={styles.flash}
       titleStyle={styles.text}
       textStyle={styles.text}
     />
@@ -15,9 +14,6 @@ export default function Flash() {
 }
 
 const styles = StyleSheet.create({
-  flash: {
-    backgroundColor: colors.error,
-  },
   text: {
     fontFamily: fonts.primary[400],
     fontSize: 16,

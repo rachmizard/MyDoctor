@@ -1,14 +1,26 @@
 import React from 'react';
-import {StyleSheet, Text, TouchableOpacity} from 'react-native';
+import {
+  ActivityIndicator,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+} from 'react-native';
 import {colors, fonts} from 'utils';
 
-export default function Button({title, type, onPress}) {
+export default function Button({title, type, onPress, loading, disabled}) {
+  const isDisabledWhen = loading || disabled;
+
   return (
     <TouchableOpacity
-      style={styles.container(type)}
+      style={[styles.container(type), loading && styles.loadingContainer]}
       onPress={onPress}
-      activeOpacity={0.8}>
-      <Text style={styles.text(type)}>{title}</Text>
+      activeOpacity={0.8}
+      disabled={isDisabledWhen}>
+      {loading ? (
+        <ActivityIndicator color={colors.primary} size="large" />
+      ) : (
+        <Text style={styles.text(type)}>{title}</Text>
+      )}
     </TouchableOpacity>
   );
 }
@@ -20,6 +32,9 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     paddingVertical: 10,
   }),
+  loadingContainer: {
+    backgroundColor: colors.disable,
+  },
   text: type => ({
     fontSize: 18,
     textAlign: 'center',
