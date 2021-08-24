@@ -8,16 +8,19 @@ import {
   View,
 } from 'react-native';
 import {colors, fonts} from 'utils';
+import {useSelector} from 'react-redux';
 
 export default function HomeProfile({onPress}) {
+  const getProfileAuth = useSelector(state => state.authReducer.auth);
+
   return (
     <View style={styles.container}>
       <TouchableWithoutFeedback onPress={onPress}>
         <Image source={UserShayna1} style={styles.avatar} />
       </TouchableWithoutFeedback>
       <View>
-        <Text style={styles.name}>Shayna Melinda</Text>
-        <Text style={styles.profession}>Product Designer</Text>
+        <Text style={styles.name}>{getProfileAuth.fullName}</Text>
+        <Text style={styles.profession}>{getProfileAuth.job}</Text>
       </View>
     </View>
   );

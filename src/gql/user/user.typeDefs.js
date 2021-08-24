@@ -33,3 +33,22 @@ export const SIGN_IN = gql`
     }
   }
 `;
+
+export const SIGN_OUT = gql`
+  mutation SignOut {
+    userSignOut {
+      status
+    }
+  }
+`;
+
+export const GET_USER_BY_ID = gql`
+  query GetUserById($id: ID!) {
+    getUserById(id: $id) {
+      id
+      email
+      fullName
+      job
+    }
+  }
+`;

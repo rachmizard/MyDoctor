@@ -1,5 +1,7 @@
 import {ApolloClient, HttpLink, InMemoryCache, from} from '@apollo/client';
 import {onError} from '@apollo/client/link/error';
+import {setContext} from '@apollo/client/link/context';
+import {store} from '../stores';
 
 const errorLink = onError(({graphQLErrors, networkError}) => {
   if (graphQLErrors) {
@@ -15,6 +17,16 @@ const errorLink = onError(({graphQLErrors, networkError}) => {
   }
 });
 
+const authLink = setContext((_, {headers}) => {
+  const token = store.getState().authReducer.auth.token;
+  return {
+    headers: {
+      ...headers,
+      authorization: token ? token : '',
+    },
+  };
+});
+
 const link = from([
   errorLink,
   new HttpLink({
@@ -24,7 +36,7 @@ const link = from([
 
 const client = new ApolloClient({
   cache: new InMemoryCache(),
-  link,
+  link: authLink.concat(link),
 });
 
 export default client;

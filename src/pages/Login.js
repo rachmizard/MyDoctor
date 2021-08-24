@@ -7,6 +7,8 @@ import {useForm} from 'hooks';
 import {showMessage} from 'react-native-flash-message';
 import {useMutation} from '@apollo/client';
 import {SIGN_IN} from 'gql/user/user.typeDefs';
+import {useDispatch} from 'react-redux';
+import {setSignIn} from 'stores/auth/auth.action';
 
 export default function Login({navigation}) {
   const {fields, setField, errors, setErrors} = useForm({
@@ -15,6 +17,7 @@ export default function Login({navigation}) {
   });
 
   const [signIn, {loading}] = useMutation(SIGN_IN);
+  const dispatch = useDispatch();
 
   const onSubmitSignIn = () => {
     if (!fields.email) {
@@ -66,7 +69,9 @@ export default function Login({navigation}) {
     }
 
     signIn({variables: fields})
-      .then(() => {
+      .then(({data}) => {
+        dispatch(setSignIn(data.userSignIn));
+
         showMessage({
           type: 'success',
           message: 'Successfully Logged in',
