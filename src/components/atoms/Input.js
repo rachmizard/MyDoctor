@@ -10,6 +10,8 @@ export default function Input({
   onChangeText,
   keyboardType,
   secureTextEntry,
+  hasError,
+  placeholder,
 }) {
   const [isFocus, setIsFocus] = useState(false);
 
@@ -25,12 +27,14 @@ export default function Input({
     <View>
       <Text style={styles.label}>{label}</Text>
       <TextInput
+        placeholder={placeholder}
         onFocus={handleFocus}
         onBlur={handleBlur}
         style={StyleSheet.flatten([
           styles.input,
           disabled && styles.disabledInput,
           isFocus && styles.focusInput,
+          hasError && styles.errorInput,
         ])}
         editable={!disabled}
         value={value}
@@ -59,6 +63,10 @@ const styles = StyleSheet.create({
   focusInput: {
     borderWidth: 1,
     borderColor: colors.tertiary,
+  },
+  errorInput: {
+    borderWidth: 1,
+    borderColor: colors.error,
   },
   label: {
     fontFamily: fonts.primary[400],

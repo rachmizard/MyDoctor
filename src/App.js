@@ -5,6 +5,7 @@ import {usePersistNavigation} from 'hooks';
 import {ActivityIndicator} from 'react-native';
 import {ApolloProvider} from '@apollo/client';
 import {client} from 'gql';
+import {Flash} from 'components';
 
 export default function App() {
   const {initialState, getPersistenceKey, isReady, setAsyncStorage} =
@@ -23,6 +24,7 @@ export default function App() {
         }>
         <Navigations />
       </NavigationContainer>
+      <Flash />
     </ApolloProvider>
   );
 }

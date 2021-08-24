@@ -41,4 +41,5 @@ export const colors = {
   },
   border: mainColors.grey2,
   cardLight: mainColors.green2,
+  error: mainColors.red1,
 };
