@@ -6,6 +6,8 @@ import {showMessage} from 'react-native-flash-message';
 import {useForm} from 'hooks';
 import {useMutation} from '@apollo/client';
 import {SIGN_UP} from 'gql/user/user.typeDefs';
+import {useDispatch} from 'react-redux';
+import {setSignIn} from 'stores/auth/auth.action';
 
 export default function Register({navigation}) {
   const {fields, setField, errors, setErrors, clearForm} = useForm({
@@ -14,6 +16,8 @@ export default function Register({navigation}) {
     email: '',
     password: '',
   });
+
+  const dispatch = useDispatch();
 
   const [signUp, {loading}] = useMutation(SIGN_UP);
 
@@ -88,8 +92,11 @@ export default function Register({navigation}) {
 
     if (!errors.email && !errors.password) {
       signUp({variables: fields})
-        .then(res => {
+        .then(({data}) => {
           clearForm();
+
+          dispatch(setSignIn(data.userSignUp));
+
           navigation.navigate('UploadPhoto');
           showMessage({
             type: 'success',
