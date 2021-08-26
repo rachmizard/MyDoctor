@@ -9,15 +9,23 @@ import {Avatar, Button, Gap, ProfileItem} from 'components';
 import {useAuth} from 'hooks';
 import React from 'react';
 import {StyleSheet, View} from 'react-native';
+import {showMessage} from 'react-native-flash-message';
 import {colors} from 'utils';
 
 export default function UserProfile({navigation}) {
   const {auth, onSignOut, signOutLoading} = useAuth();
 
   const onHandleLogout = () => {
-    onSignOut().then(() => {
-      navigation.replace('Login');
-    });
+    onSignOut()
+      .then(() => {
+        navigation.replace('Login');
+      })
+      .catch(err => {
+        showMessage({
+          type: 'danger',
+          message: err.message,
+        });
+      });
   };
 
   return (

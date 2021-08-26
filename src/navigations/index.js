@@ -17,6 +17,7 @@ import {
   DoctorProfilePage,
 } from 'pages';
 import {BottomNavigator, Header, HeaderChat} from 'components';
+import {useAuth} from 'hooks';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -34,6 +35,8 @@ const MainApp = () => {
 };
 
 export default function Navigations() {
+  const {checkAuth} = useAuth();
+
   return (
     <Stack.Navigator initialRouteName="Splash">
       <Stack.Screen
@@ -46,79 +49,84 @@ export default function Navigations() {
         component={GetStartedPage}
         options={{headerShown: false}}
       />
-      <Stack.Screen
-        name="Register"
-        component={RegisterPage}
-        options={{
-          headerTitle: 'Daftar Akun',
-          header: props => <Header {...props} />,
-        }}
-      />
-      <Stack.Screen
-        name="UploadPhoto"
-        component={UploadPhotoPage}
-        options={{
-          headerTitle: 'Upload Photo',
-          header: props => <Header {...props} />,
-        }}
-      />
-      <Stack.Screen
-        name="Login"
-        component={LoginPage}
-        options={{headerShown: false}}
-      />
-      <Stack.Screen
-        name="MainApp"
-        component={MainApp}
-        options={{
-          headerShown: false,
-        }}
-      />
-      <Stack.Screen
-        name="ChooseDoctor"
-        component={ChooseDoctorPage}
-        options={{
-          animation: 'slide_from_right',
-          headerTitle: 'Pilih Dokter Anak',
-          header: props => <Header type="dark" {...props} />,
-        }}
-      />
-      <Stack.Screen
-        name="Chatting"
-        component={ChattingPage}
-        options={{
-          animation: 'slide_from_right',
-          headerTitle: 'Nairobi Putri Hayza',
-          header: props => <HeaderChat type="dark-chat-profile" {...props} />,
-        }}
-      />
-      <Stack.Screen
-        name="UserProfile"
-        component={UserProfilePage}
-        options={{
-          animation: 'slide_from_right',
-          headerTitle: 'Profile',
-          header: props => <Header {...props} />,
-        }}
-      />
-      <Stack.Screen
-        name="EditProfile"
-        component={EditProfilePage}
-        options={{
-          animation: 'slide_from_right',
-          headerTitle: 'Edit Akun',
-          header: props => <Header {...props} />,
-        }}
-      />
-      <Stack.Screen
-        name="DoctorProfile"
-        component={DoctorProfilePage}
-        options={{
-          animation: 'slide_from_right',
-          headerTitle: 'Profile',
-          header: props => <Header {...props} />,
-        }}
-      />
+      {!checkAuth ? (
+        <>
+          <Stack.Screen
+            name="Register"
+            component={RegisterPage}
+            options={{
+              headerTitle: 'Daftar Akun',
+              header: props => <Header {...props} />,
+            }}
+          />
+          <Stack.Screen
+            name="Login"
+            component={LoginPage}
+            options={{headerShown: false}}
+          />
+        </>
+      ) : (
+        <>
+          <Stack.Screen
+            name="MainApp"
+            component={MainApp}
+            options={{
+              headerShown: false,
+            }}
+          />
+
+          <Stack.Screen
+            name="UploadPhoto"
+            component={UploadPhotoPage}
+            options={{
+              headerTitle: 'Upload Photo',
+              header: props => <Header {...props} />,
+            }}
+          />
+          <Stack.Screen
+            name="ChooseDoctor"
+            component={ChooseDoctorPage}
+            options={{
+              headerTitle: 'Pilih Dokter Anak',
+              header: props => <Header type="dark" {...props} />,
+            }}
+          />
+          <Stack.Screen
+            name="Chatting"
+            component={ChattingPage}
+            options={{
+              headerTitle: 'Nairobi Putri Hayza',
+              header: props => (
+                <HeaderChat type="dark-chat-profile" {...props} />
+              ),
+            }}
+          />
+          <Stack.Screen
+            name="UserProfile"
+            component={UserProfilePage}
+            options={{
+              headerTitle: 'Profile',
+              header: props => <Header {...props} />,
+            }}
+          />
+          <Stack.Screen
+            name="EditProfile"
+            component={EditProfilePage}
+            options={{
+              headerTitle: 'Edit Akun',
+              header: props => <Header {...props} />,
+            }}
+          />
+          <Stack.Screen
+            name="DoctorProfile"
+            component={DoctorProfilePage}
+            options={{
+              headerTitle: 'Profile',
+              header: props => <Header {...props} />,
+            }}
+          />
+        </>
+      )}
     </Stack.Navigator>
   );
 }

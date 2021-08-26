@@ -9,7 +9,6 @@ export default function Splash({navigation}) {
 
   useEffect(() => {
     const timeOut = setTimeout(() => {
-      console.log(checkAuth);
       if (checkAuth) {
         navigation.replace('MainApp');
       } else {

@@ -63,9 +63,16 @@ export default function Login({navigation}) {
       setErrors(err => ({...err, password: false}));
     }
 
-    onSignIn(fields.email, fields.password).then(() => {
-      navigation.replace('MainApp');
-    });
+    onSignIn(fields.email, fields.password)
+      .then(() => {
+        navigation.replace('MainApp');
+      })
+      .catch(err => {
+        showMessage({
+          type: 'danger',
+          message: err.message,
+        });
+      });
   };
 
   return (

@@ -1,7 +1,6 @@
 import {useMutation} from '@apollo/client';
 import {SIGN_IN, SIGN_OUT, SIGN_UP} from 'gql/user/user.typeDefs';
 import {useLayoutEffect, useState} from 'react';
-import {showMessage} from 'react-native-flash-message';
 import {useDispatch, useSelector} from 'react-redux';
 import {setSignIn, setSignOut} from 'stores/auth/auth.action';
 
@@ -14,7 +13,7 @@ function useAuth() {
   const [checkAuth, setCheckAuth] = useState(false);
 
   useLayoutEffect(() => {
-    if (auth) {
+    if (auth.token) {
       setCheckAuth(true);
     }
   }, [auth]);
@@ -23,11 +22,10 @@ function useAuth() {
     try {
       await serviceSignOut();
       dispatch(setSignOut());
+
+      return Promise.resolve();
     } catch (error) {
-      showMessage({
-        type: 'danger',
-        message: error.message,
-      });
+      return Promise.reject(error);
     }
   }
 
@@ -41,11 +39,10 @@ function useAuth() {
       });
 
       dispatch(setSignIn(data.userSignIn));
+
+      return Promise.resolve();
     } catch (error) {
-      showMessage({
-        type: 'danger',
-        message: error.message,
-      });
+      return Promise.reject(error);
     }
   }
 
@@ -56,11 +53,10 @@ function useAuth() {
       });
 
       dispatch(setSignIn(data.userSignUp));
+
+      return Promise.resolve();
     } catch (error) {
-      showMessage({
-        type: 'danger',
-        message: error.message,
-      });
+      return Promise.reject(error);
     }
   }
 

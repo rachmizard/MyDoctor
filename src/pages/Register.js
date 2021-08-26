@@ -85,10 +85,17 @@ export default function Register({navigation}) {
     }
 
     if (!errors.email && !errors.password) {
-      onSignUp(fields).then(() => {
-        clearForm();
-        navigation.navigate('UploadPhoto');
-      });
+      onSignUp(fields)
+        .then(() => {
+          clearForm();
+          navigation.navigate('UploadPhoto');
+        })
+        .catch(err => {
+          showMessage({
+            type: 'danger',
+            message: err.message,
+          });
+        });
     }
   };
 
