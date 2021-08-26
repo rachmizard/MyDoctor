@@ -5,7 +5,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 const PERSISTENCE_KEY = 'NAVIGATION_STATE';
 
 function usePersistNavigation() {
-  const [isReady, setIsReady] = useState(true);
+  const [isReady, setIsReady] = useState(__DEV__ ? false : true);
   const [initialState, setInitialState] = useState();
 
   useEffect(() => {
