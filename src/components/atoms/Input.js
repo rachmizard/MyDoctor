@@ -12,6 +12,7 @@ export default function Input({
   secureTextEntry,
   hasError,
   placeholder,
+  autoCapitalize,
 }) {
   const [isFocus, setIsFocus] = useState(false);
 
@@ -30,6 +31,7 @@ export default function Input({
         placeholder={placeholder}
         onFocus={handleFocus}
         onBlur={handleBlur}
+        autoCapitalize={autoCapitalize}
         style={StyleSheet.flatten([
           styles.input,
           disabled && styles.disabledInput,

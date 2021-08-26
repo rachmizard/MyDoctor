@@ -88,7 +88,7 @@ export default function Register({navigation}) {
       onSignUp(fields)
         .then(() => {
           clearForm();
-          navigation.navigate('UploadPhoto');
+          navigation.replace('App', {screen: 'UploadPhoto'});
         })
         .catch(err => {
           showMessage({
@@ -107,6 +107,7 @@ export default function Register({navigation}) {
           label="Full Name"
           value={fields.fullName}
           hasError={errors.fullName}
+          autoCapitalize="words"
           onChangeText={value => {
             setField('fullName', value);
           }}
@@ -117,6 +118,7 @@ export default function Register({navigation}) {
           label="Pekerjaan"
           value={fields.job}
           hasError={errors.job}
+          autoCapitalize="words"
           onChangeText={value => {
             setField('job', value);
           }}
@@ -127,6 +129,7 @@ export default function Register({navigation}) {
           label="Email Address"
           value={fields.email}
           hasError={errors.email}
+          autoCapitalize="none"
           onChangeText={value => {
             setField('email', value);
           }}
@@ -137,6 +140,7 @@ export default function Register({navigation}) {
           value={fields.password}
           hasError={errors.password}
           secureTextEntry
+          autoCapitalize="none"
           onChangeText={value => {
             setField('password', value);
           }}

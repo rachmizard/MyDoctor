@@ -65,7 +65,7 @@ export default function Login({navigation}) {
 
     onSignIn(fields.email, fields.password)
       .then(() => {
-        navigation.replace('MainApp');
+        navigation.replace('App', {screen: 'MainApp'});
       })
       .catch(err => {
         showMessage({
@@ -83,6 +83,7 @@ export default function Login({navigation}) {
         label="Email"
         value={fields.email}
         hasError={errors.email}
+        autoCapitalize="none"
         onChangeText={value => setField('email', value)}
       />
       <Gap height={24} />
@@ -92,6 +93,7 @@ export default function Login({navigation}) {
         value={fields.password}
         onChangeText={value => setField('password', value)}
         hasError={errors.password}
+        autoCapitalize="none"
       />
       <Gap height={10} />
       <Link title="Forgot My Password" />

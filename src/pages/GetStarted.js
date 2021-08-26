@@ -16,13 +16,13 @@ export default function GetStarted({navigation}) {
       <View>
         <Button
           title="Get Started"
-          onPress={() => navigation.navigate('Register')}
+          onPress={() => navigation.navigate('AuthApp', {screen: 'Register'})}
         />
         <Gap height={16} />
         <Button
           title="Sign In"
           type="secondary"
-          onPress={() => navigation.replace('Login')}
+          onPress={() => navigation.replace('AuthApp', {screen: 'Login'})}
         />
       </View>
     </ImageBackground>

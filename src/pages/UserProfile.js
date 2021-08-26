@@ -18,7 +18,7 @@ export default function UserProfile({navigation}) {
   const onHandleLogout = () => {
     onSignOut()
       .then(() => {
-        navigation.replace('Login');
+        navigation.replace('AuthApp', {screen: 'Login'});
       })
       .catch(err => {
         showMessage({
