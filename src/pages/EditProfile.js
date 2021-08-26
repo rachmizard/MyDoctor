@@ -1,18 +1,17 @@
 import {UserShayna2} from 'assets';
 import {Avatar, Button, Gap, Input} from 'components';
-import {useForm} from 'hooks';
+import {useAuth, useForm} from 'hooks';
 import React from 'react';
 import {ScrollView, StyleSheet, View} from 'react-native';
 import {colors} from 'utils';
-import {useSelector} from 'react-redux';
 
 export default function EditProfile() {
-  const getAuth = useSelector(state => state.authReducer.auth);
+  const {auth} = useAuth();
 
   const {fields, setField} = useForm({
-    fullName: getAuth.fullName,
-    job: getAuth.job,
-    email: getAuth.email,
+    fullName: auth.fullName,
+    job: auth.job,
+    email: auth.email,
     password: '',
   });
 
@@ -25,8 +24,8 @@ export default function EditProfile() {
       <ScrollView showsVerticalScrollIndicator={false}>
         <Avatar
           pic={UserShayna2}
-          name={getAuth.fullName}
-          profession={getAuth.job}
+          name={auth.fullName}
+          profession={auth.job}
           editable
         />
         <View style={styles.form}>

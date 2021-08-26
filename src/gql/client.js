@@ -18,7 +18,8 @@ const errorLink = onError(({graphQLErrors, networkError}) => {
 });
 
 const authLink = setContext((_, {headers}) => {
-  const token = store.getState().authReducer.auth.token;
+  const token = store.getState().authReducer.auth?.token || '';
+
   return {
     headers: {
       ...headers,

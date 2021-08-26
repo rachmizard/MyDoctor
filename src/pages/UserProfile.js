@@ -1,4 +1,3 @@
-import {useMutation} from '@apollo/client';
 import {
   ICAccountCircleOutline,
   ICDescription,
@@ -7,40 +6,23 @@ import {
   UserShayna2,
 } from 'assets';
 import {Avatar, Button, Gap, ProfileItem} from 'components';
-import {SIGN_OUT} from 'gql/user/user.typeDefs';
+import {useAuth} from 'hooks';
 import React from 'react';
 import {StyleSheet, View} from 'react-native';
-import {showMessage} from 'react-native-flash-message';
-import {useDispatch, useSelector} from 'react-redux';
-import {setSignOut} from 'stores/auth/auth.action';
 import {colors} from 'utils';
 
 export default function UserProfile({navigation}) {
-  const [signOut, {loading}] = useMutation(SIGN_OUT);
-  const dispatch = useDispatch();
-  const getProfileAuth = useSelector(state => state.authReducer.auth);
+  const {auth, onSignOut, signOutLoading} = useAuth();
 
   const onHandleLogout = () => {
-    signOut()
-      .then(() => {
-        dispatch(setSignOut());
-        navigation.replace('Login');
-      })
-      .catch(error => {
-        showMessage({
-          type: 'danger',
-          message: error.message,
-        });
-      });
+    onSignOut().then(() => {
+      navigation.replace('Login');
+    });
   };
 
   return (
     <View style={styles.page}>
-      <Avatar
-        pic={UserShayna2}
-        name={getProfileAuth.fullName}
-        profession={getProfileAuth.job}
-      />
+      <Avatar pic={UserShayna2} name={auth.fullName} profession={auth.job} />
       <View style={styles.items}>
         <ProfileItem
           icon={<ICAccountCircleOutline />}
@@ -66,7 +48,11 @@ export default function UserProfile({navigation}) {
       </View>
       <Gap height={30} />
       <View style={styles.buttonWrapper}>
-        <Button loading={loading} title="Sign Out" onPress={onHandleLogout} />
+        <Button
+          loading={signOutLoading}
+          title="Sign Out"
+          onPress={onHandleLogout}
+        />
       </View>
     </View>
   );

@@ -1,14 +1,26 @@
+import {ILLogo} from 'assets';
+import {useAuth} from 'hooks';
 import React, {useEffect} from 'react';
 import {StyleSheet, Text, View} from 'react-native';
-import {ILLogo} from 'assets';
 import {colors, fonts} from 'utils';
 
 export default function Splash({navigation}) {
+  const {checkAuth} = useAuth();
+
   useEffect(() => {
-    setTimeout(() => {
-      navigation.replace('GetStarted');
-    }, 3000);
-  }, [navigation]);
+    const timeOut = setTimeout(() => {
+      console.log(checkAuth);
+      if (checkAuth) {
+        navigation.replace('MainApp');
+      } else {
+        navigation.replace('GetStarted');
+      }
+    }, 400);
+
+    return () => {
+      clearTimeout(timeOut);
+    };
+  }, [checkAuth, navigation]);
 
   return (
     <View style={styles.page}>

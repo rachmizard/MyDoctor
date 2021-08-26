@@ -1,14 +1,10 @@
+import {ILLogo} from 'assets';
+import {Button, Gap, Input, Link} from 'components';
+import {useAuth, useForm} from 'hooks';
 import React from 'react';
 import {StyleSheet, Text, View} from 'react-native';
-import {Button, Gap, Input, Link} from 'components';
-import {ILLogo} from 'assets';
-import {colors, emailReg, fonts} from 'utils';
-import {useForm} from 'hooks';
 import {showMessage} from 'react-native-flash-message';
-import {useMutation} from '@apollo/client';
-import {SIGN_IN} from 'gql/user/user.typeDefs';
-import {useDispatch} from 'react-redux';
-import {setSignIn} from 'stores/auth/auth.action';
+import {colors, emailReg, fonts} from 'utils';
 
 export default function Login({navigation}) {
   const {fields, setField, errors, setErrors} = useForm({
@@ -16,8 +12,7 @@ export default function Login({navigation}) {
     password: '',
   });
 
-  const [signIn, {loading}] = useMutation(SIGN_IN);
-  const dispatch = useDispatch();
+  const {onSignIn, signInLoading} = useAuth();
 
   const onSubmitSignIn = () => {
     if (!fields.email) {
@@ -68,23 +63,9 @@ export default function Login({navigation}) {
       setErrors(err => ({...err, password: false}));
     }
 
-    signIn({variables: fields})
-      .then(({data}) => {
-        dispatch(setSignIn(data.userSignIn));
-
-        showMessage({
-          type: 'success',
-          message: 'Successfully Logged in',
-        });
-
-        navigation.replace('MainApp');
-      })
-      .catch(err => {
-        showMessage({
-          type: 'danger',
-          message: err.message,
-        });
-      });
+    onSignIn(fields.email, fields.password).then(() => {
+      navigation.replace('MainApp');
+    });
   };
 
   return (
@@ -108,7 +89,11 @@ export default function Login({navigation}) {
       <Gap height={10} />
       <Link title="Forgot My Password" />
       <Gap height={40} />
-      <Button title="Sign In" loading={loading} onPress={onSubmitSignIn} />
+      <Button
+        title="Sign In"
+        loading={signInLoading}
+        onPress={onSubmitSignIn}
+      />
       <Gap height={30} />
       <Link
         title="Create New Account"

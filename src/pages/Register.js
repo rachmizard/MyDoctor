@@ -1,13 +1,9 @@
 import {Button, Gap, Input} from 'components';
+import {useAuth, useForm} from 'hooks';
 import React from 'react';
 import {StyleSheet, View} from 'react-native';
-import {colors, emailReg} from 'utils';
 import {showMessage} from 'react-native-flash-message';
-import {useForm} from 'hooks';
-import {useMutation} from '@apollo/client';
-import {SIGN_UP} from 'gql/user/user.typeDefs';
-import {useDispatch} from 'react-redux';
-import {setSignIn} from 'stores/auth/auth.action';
+import {colors, emailReg} from 'utils';
 
 export default function Register({navigation}) {
   const {fields, setField, errors, setErrors, clearForm} = useForm({
@@ -17,9 +13,7 @@ export default function Register({navigation}) {
     password: '',
   });
 
-  const dispatch = useDispatch();
-
-  const [signUp, {loading}] = useMutation(SIGN_UP);
+  const {onSignUp, signUpLoading} = useAuth();
 
   const onSubmitSignUp = () => {
     let reg = emailReg;
@@ -91,24 +85,10 @@ export default function Register({navigation}) {
     }
 
     if (!errors.email && !errors.password) {
-      signUp({variables: fields})
-        .then(({data}) => {
-          clearForm();
-
-          dispatch(setSignIn(data.userSignUp));
-
-          navigation.navigate('UploadPhoto');
-          showMessage({
-            type: 'success',
-            message: 'Successfully Registered',
-          });
-        })
-        .catch(err => {
-          showMessage({
-            type: 'danger',
-            message: err.message,
-          });
-        });
+      onSignUp(fields).then(() => {
+        clearForm();
+        navigation.navigate('UploadPhoto');
+      });
     }
   };
 
@@ -155,7 +135,11 @@ export default function Register({navigation}) {
           }}
         />
         <Gap height={24} />
-        <Button title="Continue" loading={loading} onPress={onSubmitSignUp} />
+        <Button
+          title="Continue"
+          loading={signUpLoading}
+          onPress={onSubmitSignUp}
+        />
       </View>
     </View>
   );

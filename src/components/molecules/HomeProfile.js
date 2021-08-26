@@ -1,4 +1,5 @@
 import {UserShayna1} from 'assets';
+import {useAuth} from 'hooks';
 import React from 'react';
 import {
   Image,
@@ -8,10 +9,9 @@ import {
   View,
 } from 'react-native';
 import {colors, fonts} from 'utils';
-import {useSelector} from 'react-redux';
 
 export default function HomeProfile({onPress}) {
-  const getProfileAuth = useSelector(state => state.authReducer.auth);
+  const {auth} = useAuth();
 
   return (
     <View style={styles.container}>
@@ -19,8 +19,8 @@ export default function HomeProfile({onPress}) {
         <Image source={UserShayna1} style={styles.avatar} />
       </TouchableWithoutFeedback>
       <View>
-        <Text style={styles.name}>{getProfileAuth.fullName}</Text>
-        <Text style={styles.profession}>{getProfileAuth.job}</Text>
+        <Text style={styles.name}>{auth?.fullName}</Text>
+        <Text style={styles.profession}>{auth?.job}</Text>
       </View>
     </View>
   );

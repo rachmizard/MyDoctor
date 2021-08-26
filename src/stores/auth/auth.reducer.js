@@ -10,7 +10,7 @@ const authReducer = (state = INITIAL_STATE, action) => {
       auth: action.payload,
     };
   }
-  if (action.type == SET_SIGN_OUT) {
+  if (action.type === SET_SIGN_OUT) {
     return {
       auth: {},
     };
