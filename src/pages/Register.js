@@ -11,6 +11,7 @@ export default function Register({navigation}) {
     job: '',
     email: '',
     password: '',
+    photoUrl: '',
   });
 
   const {onSignUp, signUpLoading} = useAuth();

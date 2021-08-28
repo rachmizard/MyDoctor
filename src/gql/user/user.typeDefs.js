@@ -1,23 +1,14 @@
 import {gql} from '@apollo/client';
 
 export const SIGN_UP = gql`
-  mutation SignUp(
-    $email: String!
-    $password: String!
-    $fullName: String!
-    $job: String!
-  ) {
-    userSignUp(
-      email: $email
-      password: $password
-      fullName: $fullName
-      job: $job
-    ) {
+  mutation SignUp($payload: UserInput!) {
+    userSignUp(payload: $payload) {
       id
       fullName
       email
       job
       token
+      photoUrl
     }
   }
 `;
@@ -30,6 +21,7 @@ export const SIGN_IN = gql`
       fullName
       token
       job
+      photoUrl
     }
   }
 `;
@@ -42,6 +34,15 @@ export const SIGN_OUT = gql`
   }
 `;
 
+export const UPLOAD_USER_PHOTO = gql`
+  mutation UploadUserPhoto($file: FileUploadInput!) {
+    uploadUserPhoto(file: $file) {
+      success
+      url
+    }
+  }
+`;
+
 export const GET_USER_BY_ID = gql`
   query GetUserById($id: ID!) {
     getUserById(id: $id) {
@@ -49,6 +50,7 @@ export const GET_USER_BY_ID = gql`
       email
       fullName
       job
+      photoUrl
     }
   }
 `;

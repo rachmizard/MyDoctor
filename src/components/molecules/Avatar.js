@@ -1,4 +1,10 @@
-import {ICClose, ICGenderFemale, ICGenderMale} from 'assets';
+import {
+  ICClose,
+  ICAddBtnPhoto,
+  ICGenderFemale,
+  ICGenderMale,
+  ILUserDefault,
+} from 'assets';
 import {IconButton} from 'components/atoms';
 import React from 'react';
 import {Image, StyleSheet, Text, View} from 'react-native';
@@ -11,6 +17,9 @@ export default function Avatar({
   editable,
   gender,
   withGender,
+  hasPhoto,
+  onPressAddPhoto,
+  onPressRemovePhoto,
 }) {
   const GenderIcon = () => {
     if (gender === 'female') {
@@ -37,17 +46,26 @@ export default function Avatar({
     return (
       <View style={styles.iconWrapper}>
         <IconButton
+          onPress={hasPhoto ? onPressRemovePhoto : onPressAddPhoto}
           style={[styles.iconButton, styles.normal]}
-          icon={<ICClose />}
+          icon={hasPhoto ? <ICClose /> : <ICAddBtnPhoto />}
         />
       </View>
+    );
+  };
+
+  const AvatarPic = () => {
+    return hasPhoto ? (
+      <Image source={{uri: pic}} style={styles.avatar} />
+    ) : (
+      <Image source={ILUserDefault} style={styles.avatar} />
     );
   };
 
   return (
     <View style={styles.container}>
       <View style={styles.avatarWrapper}>
-        <Image source={pic} style={styles.avatar} />
+        <AvatarPic />
         {editable && <EditableIcon />}
         {gender !== null && withGender && <GenderIcon />}
       </View>

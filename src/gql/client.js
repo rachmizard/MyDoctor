@@ -1,7 +1,9 @@
-import {ApolloClient, HttpLink, InMemoryCache, from} from '@apollo/client';
-import {onError} from '@apollo/client/link/error';
+import {ApolloClient, from, InMemoryCache} from '@apollo/client';
 import {setContext} from '@apollo/client/link/context';
+import {onError} from '@apollo/client/link/error';
+import {createUploadLink} from 'apollo-upload-client';
 import {store} from '../stores';
+import {rootTypeDef} from './typeDefs';
 
 const errorLink = onError(({graphQLErrors, networkError}) => {
   if (graphQLErrors) {
@@ -30,14 +32,13 @@ const authLink = setContext((_, {headers}) => {
 
 const link = from([
   errorLink,
-  new HttpLink({
-    uri: 'http://192.168.1.7:4000/graphql',
-  }),
+  createUploadLink({uri: 'http://192.168.1.7:5000/graphql'}),
 ]);
 
 const client = new ApolloClient({
   cache: new InMemoryCache(),
   link: authLink.concat(link),
+  typeDefs: [rootTypeDef],
 });
 
 export default client;

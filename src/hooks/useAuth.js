@@ -25,6 +25,7 @@ function useAuth() {
 
       return Promise.resolve();
     } catch (error) {
+      dispatch(setSignOut());
       return Promise.reject(error);
     }
   }
@@ -49,7 +50,9 @@ function useAuth() {
   async function onSignUp(fields) {
     try {
       const {data} = await serviceSignUp({
-        variables: fields,
+        variables: {
+          payload: fields,
+        },
       });
 
       dispatch(setSignIn(data.userSignUp));

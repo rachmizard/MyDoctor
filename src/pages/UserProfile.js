@@ -21,6 +21,7 @@ export default function UserProfile({navigation}) {
         navigation.replace('AuthApp', {screen: 'Login'});
       })
       .catch(err => {
+        navigation.replace('AuthApp', {screen: 'Login'});
         showMessage({
           type: 'danger',
           message: err.message,

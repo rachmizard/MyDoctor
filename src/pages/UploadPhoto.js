@@ -1,25 +1,81 @@
-import {ICAddBtnPhoto, ILUserDefault} from 'assets';
-import {Button, Gap, Link} from 'components';
-import React from 'react';
-import {Image, StyleSheet, Text, View} from 'react-native';
-import {colors, fonts} from 'utils';
+import {useMutation} from '@apollo/client';
+import {Avatar, Button, Gap, Link} from 'components';
+import {IMAGE_PICKER_OPTIONS} from 'constant';
+import {UPLOAD_USER_PHOTO} from 'gql/user/user.typeDefs';
+import {useAuth} from 'hooks';
+import React, {useState} from 'react';
+import {StyleSheet, View} from 'react-native';
+import {showMessage} from 'react-native-flash-message';
+import {launchImageLibrary} from 'react-native-image-picker';
+import {colors} from 'utils';
 
 export default function UploadPhoto({navigation}) {
+  const {auth} = useAuth();
+  const [hasPhoto, setHasPhoto] = useState(false);
+  const [media, setMedia] = useState({});
+  const [uploadUserPhoto, {loading}] = useMutation(UPLOAD_USER_PHOTO);
+
+  function handleLaunchImageLibrary() {
+    return launchImageLibrary(
+      IMAGE_PICKER_OPTIONS,
+      ({assets, didCancel, errorMessage}) => {
+        if (assets) {
+          setHasPhoto(true);
+          setMedia(assets[0]);
+        }
+
+        if (didCancel) {
+          setMedia({});
+          setHasPhoto(false);
+        }
+
+        if (errorMessage) {
+          showMessage({
+            type: 'warning',
+            message: errorMessage,
+          });
+        }
+      },
+    );
+  }
+
+  function handleRemovePhoto() {
+    setMedia({});
+    setHasPhoto(false);
+  }
+
+  function handleUploadPhoto() {
+    if (media) {
+      const file = media;
+      uploadUserPhoto({variables: {file}}).catch(error => {
+        showMessage({
+          type: 'warning',
+          message: error.message,
+        });
+      });
+    }
+  }
+
   return (
     <View style={styles.page}>
       <View style={styles.content}>
         <View style={styles.profile}>
-          <View style={styles.avatarWrapper}>
-            <Image source={ILUserDefault} style={styles.avatarImg} />
-            <ICAddBtnPhoto style={styles.addPhoto} />
-          </View>
-          <Text style={styles.name}>Shayna Melinda</Text>
-          <Text style={styles.profession}>Product Designer</Text>
+          <Avatar
+            pic={media.uri}
+            name={auth.fullName}
+            profession={auth.job}
+            hasPhoto={hasPhoto}
+            onPressAddPhoto={handleLaunchImageLibrary}
+            onPressRemovePhoto={handleRemovePhoto}
+            editable
+          />
         </View>
         <View>
           <Button
+            loading={loading}
+            disabled={!hasPhoto}
             title="Upload and Continue"
-            onPress={() => navigation.replace('MainApp')}
+            onPress={handleUploadPhoto}
           />
           <Gap height={30} />
           <Link
@@ -49,36 +105,5 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-  },
-  avatarWrapper: {
-    width: 130,
-    height: 130,
-    borderWidth: 1,
-    borderColor: colors.border,
-    borderRadius: 130 / 2,
-    justifyContent: 'center',
-    alignItems: 'center',
-    position: 'relative',
-  },
-  avatarImg: {
-    width: 110,
-    height: 110,
-  },
-  addPhoto: {
-    position: 'absolute',
-    bottom: 8,
-    right: 6,
-  },
-  name: {
-    fontFamily: fonts.primary[600],
-    fontSize: 24,
-    color: colors.text.primary,
-    textAlign: 'center',
-  },
-  profession: {
-    fontFamily: fonts.primary.normal,
-    fontSize: 18,
-    color: colors.text.secondary,
-    textAlign: 'center',
   },
 });

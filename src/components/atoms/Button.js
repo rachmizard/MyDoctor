@@ -12,7 +12,11 @@ export default function Button({title, type, onPress, loading, disabled}) {
 
   return (
     <TouchableOpacity
-      style={[styles.container(type), loading && styles.loadingContainer]}
+      style={[
+        styles.container(type),
+        loading && styles.loadingContainer,
+        disabled && styles.disabled,
+      ]}
       onPress={onPress}
       activeOpacity={0.8}
       disabled={isDisabledWhen}>
@@ -44,4 +48,7 @@ const styles = StyleSheet.create({
         : colors.button.primary.text,
     fontFamily: fonts.primary[600],
   }),
+  disabled: {
+    backgroundColor: colors.disable,
+  },
 });
