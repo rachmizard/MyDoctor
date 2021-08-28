@@ -17,7 +17,6 @@ export default function Avatar({
   editable,
   gender,
   withGender,
-  hasPhoto,
   onPressAddPhoto,
   onPressRemovePhoto,
 }) {
@@ -46,16 +45,16 @@ export default function Avatar({
     return (
       <View style={styles.iconWrapper}>
         <IconButton
-          onPress={hasPhoto ? onPressRemovePhoto : onPressAddPhoto}
+          onPress={pic ? onPressRemovePhoto : onPressAddPhoto}
           style={[styles.iconButton, styles.normal]}
-          icon={hasPhoto ? <ICClose /> : <ICAddBtnPhoto />}
+          icon={pic ? <ICClose /> : <ICAddBtnPhoto />}
         />
       </View>
     );
   };
 
   const AvatarPic = () => {
-    return hasPhoto ? (
+    return pic ? (
       <Image source={{uri: pic}} style={styles.avatar} />
     ) : (
       <Image source={ILUserDefault} style={styles.avatar} />
