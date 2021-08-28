@@ -35,7 +35,7 @@ export default function EditProfile() {
       .then(() =>
         showMessage({type: 'success', message: 'Successfully Updated'}),
       )
-      .catch(error => showMessage({type: 'success', message: error.message}));
+      .catch(error => showMessage({type: 'danger', message: error.message}));
   };
 
   return (
