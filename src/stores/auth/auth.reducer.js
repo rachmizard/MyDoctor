@@ -5,18 +5,33 @@ const INITIAL_STATE = {
 };
 
 const authReducer = (state = INITIAL_STATE, action) => {
-  if (action.type === SET_SIGN_IN || action.type === SET_UPDATE_USER) {
-    return {
-      auth: action.payload,
-    };
-  }
-  if (action.type === SET_SIGN_OUT) {
-    return {
-      auth: {},
-    };
-  }
+  switch (action.type) {
+    case SET_SIGN_IN: {
+      return {
+        auth: action.payload,
+      };
+    }
 
-  return state;
+    case SET_SIGN_OUT: {
+      return {
+        auth: {},
+      };
+    }
+
+    case SET_UPDATE_USER: {
+      return {
+        ...state,
+        auth: {
+          ...state.auth,
+          ...action.payload,
+        },
+      };
+    }
+
+    default: {
+      return state;
+    }
+  }
 };
 
 export default authReducer;

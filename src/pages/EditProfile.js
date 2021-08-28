@@ -1,31 +1,51 @@
-import {UserShayna2} from 'assets';
 import {Avatar, Button, Gap, Input} from 'components';
+import {IMAGE_PICKER_OPTIONS} from 'constant';
 import {useAuth, useForm} from 'hooks';
 import React from 'react';
 import {ScrollView, StyleSheet, View} from 'react-native';
+import {showMessage} from 'react-native-flash-message';
+import {launchImageLibrary} from 'react-native-image-picker';
 import {colors} from 'utils';
 
 export default function EditProfile() {
-  const {auth} = useAuth();
+  const {auth, updateAuth, updateAuthLoading} = useAuth();
 
   const {fields, setField} = useForm({
     fullName: auth.fullName,
     job: auth.job,
     email: auth.email,
-    password: '',
+    password: null,
+    photoUrl: auth.photoUrl,
   });
 
+  const handleLaunchLibraryImage = () => {
+    return launchImageLibrary(IMAGE_PICKER_OPTIONS, cb => {
+      if (cb.assets) {
+        setField('photoUrl', cb.assets[0].uri);
+      }
+    });
+  };
+
+  const handleRemovePhoto = () => {
+    setField('photoUrl', '');
+  };
+
   const handleSaveProfile = () => {
-    //  update post
+    updateAuth(fields)
+      .then(() =>
+        showMessage({type: 'success', message: 'Successfully Updated'}),
+      )
+      .catch(error => showMessage({type: 'success', message: error.message}));
   };
 
   return (
     <View style={styles.page}>
       <ScrollView showsVerticalScrollIndicator={false}>
         <Avatar
-          pic={auth.photoUrl}
-          hasPhoto={auth.photoUrl}
+          pic={fields.photoUrl}
           name={auth.fullName}
+          onPressAddPhoto={handleLaunchLibraryImage}
+          onPressRemovePhoto={handleRemovePhoto}
           profession={auth.job}
           editable
         />
@@ -51,7 +71,11 @@ export default function EditProfile() {
             onChangeText={text => setField('password', text)}
           />
           <Gap height={40} />
-          <Button onPress={handleSaveProfile} title="Save Profile" />
+          <Button
+            onPress={handleSaveProfile}
+            title="Save Profile"
+            loading={updateAuthLoading}
+          />
         </View>
       </ScrollView>
     </View>

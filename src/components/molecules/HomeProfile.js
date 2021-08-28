@@ -13,15 +13,11 @@ import {colors, fonts} from 'utils';
 export default function HomeProfile({onPress}) {
   const {auth} = useAuth();
 
-  const userPhoto = {
-    uri: auth.photoUrl,
-  };
-
   return (
     <View style={styles.container}>
       <TouchableWithoutFeedback onPress={onPress}>
         <Image
-          source={!auth.id ? ILUserDefault : userPhoto}
+          source={!auth.photoUrl ? ILUserDefault : {uri: auth.photoUrl}}
           style={styles.avatar}
         />
       </TouchableWithoutFeedback>

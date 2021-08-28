@@ -1,11 +1,6 @@
-import {useMutation, useQuery} from '@apollo/client';
-import {
-  GET_USER_BY_ID,
-  SIGN_IN,
-  SIGN_OUT,
-  SIGN_UP,
-} from 'gql/user/user.typeDefs';
-import {useLayoutEffect, useState} from 'react';
+import {useMutation} from '@apollo/client';
+import {SIGN_IN, SIGN_OUT, SIGN_UP, UPDATE_USER} from 'gql/user/user.typeDefs';
+import {useEffect, useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {setSignIn, setSignOut, updateUser} from 'stores/auth/auth.action';
 
@@ -15,26 +10,27 @@ function useAuth() {
   const [serviceSignOut, {loading: signOutLoading}] = useMutation(SIGN_OUT);
   const [serviceSignIn, {loading: signInLoading}] = useMutation(SIGN_IN);
   const [serviceSignUp, {loading: signUpLoading}] = useMutation(SIGN_UP);
-  const {data: getUserById} = useQuery(GET_USER_BY_ID, {
-    variables: {id: auth.id},
-  });
+  const [serviceUpdateUser, {loading: updateAuthLoading}] =
+    useMutation(UPDATE_USER);
   const [checkAuth, setCheckAuth] = useState(false);
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     if (auth.token) {
       setCheckAuth(true);
     }
   }, [auth]);
 
-  async function refreshAuth() {
+  async function updateAuth(payload) {
     try {
-      const getUpdatedUser = await getUserById;
+      const {data} = await serviceUpdateUser({
+        variables: {id: auth.id, payload},
+      });
 
-      dispatch(updateUser(getUpdatedUser));
+      dispatch(updateUser(data?.updateUser));
 
       return Promise.resolve();
     } catch (error) {
-      return Promise.reject();
+      return Promise.reject(error);
     }
   }
 
@@ -91,8 +87,9 @@ function useAuth() {
     signOutLoading,
     signInLoading,
     signUpLoading,
+    updateAuthLoading,
     checkAuth,
-    refreshAuth,
+    updateAuth,
   };
 }
 
