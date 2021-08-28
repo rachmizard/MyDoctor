@@ -7,6 +7,7 @@ export default function Flash() {
   return (
     <FlashMessage
       position="top"
+      statusBarHeight={8}
       titleStyle={styles.text}
       textStyle={styles.text}
     />
@@ -16,6 +17,6 @@ export default function Flash() {
 const styles = StyleSheet.create({
   text: {
     fontFamily: fonts.primary[400],
-    fontSize: 16,
+    fontSize: 14,
   },
 });

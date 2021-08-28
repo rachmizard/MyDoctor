@@ -7,7 +7,7 @@ import {showMessage} from 'react-native-flash-message';
 import {launchImageLibrary} from 'react-native-image-picker';
 import {colors} from 'utils';
 
-export default function EditProfile() {
+export default function EditProfile({navigation}) {
   const {auth, updateAuth, updateAuthLoading} = useAuth();
 
   const {fields, setField} = useForm({
@@ -32,8 +32,9 @@ export default function EditProfile() {
 
   const handleSaveProfile = () => {
     updateAuth(fields)
-      .then(() =>
-        showMessage({type: 'success', message: 'Successfully Updated'}),
+      .then(
+        () => showMessage({type: 'success', message: 'Successfully Updated'}),
+        navigation.navigate('MainApp'),
       )
       .catch(error => showMessage({type: 'danger', message: error.message}));
   };
