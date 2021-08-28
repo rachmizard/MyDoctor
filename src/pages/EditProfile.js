@@ -23,7 +23,8 @@ export default function EditProfile() {
     <View style={styles.page}>
       <ScrollView showsVerticalScrollIndicator={false}>
         <Avatar
-          pic={UserShayna2}
+          pic={auth.photoUrl}
+          hasPhoto={auth.photoUrl}
           name={auth.fullName}
           profession={auth.job}
           editable

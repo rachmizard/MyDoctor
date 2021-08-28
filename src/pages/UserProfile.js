@@ -31,7 +31,12 @@ export default function UserProfile({navigation}) {
 
   return (
     <View style={styles.page}>
-      <Avatar pic={UserShayna2} name={auth.fullName} profession={auth.job} />
+      <Avatar
+        pic={auth.photoUrl}
+        hasPhoto={auth.photoUrl}
+        name={auth.fullName}
+        profession={auth.job}
+      />
       <View style={styles.items}>
         <ProfileItem
           icon={<ICAccountCircleOutline />}

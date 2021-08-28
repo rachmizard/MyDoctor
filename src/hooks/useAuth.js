@@ -1,8 +1,13 @@
-import {useMutation} from '@apollo/client';
-import {SIGN_IN, SIGN_OUT, SIGN_UP} from 'gql/user/user.typeDefs';
+import {useMutation, useQuery} from '@apollo/client';
+import {
+  GET_USER_BY_ID,
+  SIGN_IN,
+  SIGN_OUT,
+  SIGN_UP,
+} from 'gql/user/user.typeDefs';
 import {useLayoutEffect, useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
-import {setSignIn, setSignOut} from 'stores/auth/auth.action';
+import {setSignIn, setSignOut, updateUser} from 'stores/auth/auth.action';
 
 function useAuth() {
   const auth = useSelector(state => state.authReducer.auth);
@@ -10,6 +15,9 @@ function useAuth() {
   const [serviceSignOut, {loading: signOutLoading}] = useMutation(SIGN_OUT);
   const [serviceSignIn, {loading: signInLoading}] = useMutation(SIGN_IN);
   const [serviceSignUp, {loading: signUpLoading}] = useMutation(SIGN_UP);
+  const {data: getUserById} = useQuery(GET_USER_BY_ID, {
+    variables: {id: auth.id},
+  });
   const [checkAuth, setCheckAuth] = useState(false);
 
   useLayoutEffect(() => {
@@ -17,6 +25,18 @@ function useAuth() {
       setCheckAuth(true);
     }
   }, [auth]);
+
+  async function refreshAuth() {
+    try {
+      const getUpdatedUser = await getUserById;
+
+      dispatch(updateUser(getUpdatedUser));
+
+      return Promise.resolve();
+    } catch (error) {
+      return Promise.reject();
+    }
+  }
 
   async function onSignOut() {
     try {
@@ -72,6 +92,7 @@ function useAuth() {
     signInLoading,
     signUpLoading,
     checkAuth,
+    refreshAuth,
   };
 }
 

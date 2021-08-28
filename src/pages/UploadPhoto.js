@@ -7,6 +7,8 @@ import React, {useState} from 'react';
 import {StyleSheet, View} from 'react-native';
 import {showMessage} from 'react-native-flash-message';
 import {launchImageLibrary} from 'react-native-image-picker';
+import {useDispatch} from 'react-redux';
+import {updateUser} from 'stores/auth/auth.action';
 import {colors} from 'utils';
 
 export default function UploadPhoto({navigation}) {
@@ -14,6 +16,7 @@ export default function UploadPhoto({navigation}) {
   const [hasPhoto, setHasPhoto] = useState(false);
   const [media, setMedia] = useState({});
   const [uploadUserPhoto, {loading}] = useMutation(UPLOAD_USER_PHOTO);
+  const dispatch = useDispatch();
 
   function handleLaunchImageLibrary() {
     return launchImageLibrary(
@@ -47,12 +50,23 @@ export default function UploadPhoto({navigation}) {
   function handleUploadPhoto() {
     if (media) {
       const file = media;
-      uploadUserPhoto({variables: {file}}).catch(error => {
-        showMessage({
-          type: 'warning',
-          message: error.message,
+      uploadUserPhoto({variables: {file}})
+        .then(({data}) => {
+          dispatch(
+            updateUser({
+              ...auth,
+              photoUrl: data.uploadUserPhoto.url,
+            }),
+          );
+
+          navigation.replace('MainApp');
+        })
+        .catch(error => {
+          showMessage({
+            type: 'warning',
+            message: error.message,
+          });
         });
-      });
     }
   }
 
