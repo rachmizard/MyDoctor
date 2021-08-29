@@ -33,7 +33,9 @@ export default function Doctor({navigation}) {
                   <DoctorCategory
                     key={id}
                     category={category}
-                    onPress={() => navigation.navigate('ChooseDoctor')}
+                    onPress={() =>
+                      navigation.navigate('ChooseDoctor', {category})
+                    }
                   />
                 );
               })}

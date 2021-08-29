@@ -13,7 +13,7 @@ export default function ListDoctor({pic, name, desc, iconNext, onPress}) {
   return (
     <TouchableWithoutFeedback style={styles.messageWrapper} onPress={onPress}>
       <View style={styles.messageItem}>
-        <Image source={pic} style={styles.avatar} />
+        <Image source={{uri: pic}} style={styles.avatar} />
         <View style={styles.info}>
           <Text style={styles.name}>{name}</Text>
           <Text style={styles.chatText}>{desc}</Text>

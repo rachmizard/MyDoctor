@@ -1,25 +1,39 @@
+import {useQuery} from '@apollo/client';
 import {ListDoctor} from 'components';
-import {JSONDummyData} from 'mocks';
+import {GQL_DOCTORS_BY_CATEGORY} from 'gql/doctor/doctor.typeDefs';
 import React from 'react';
-import {ScrollView, StyleSheet} from 'react-native';
+import {RefreshControl, ScrollView} from 'react-native';
 
-export default function ChooseDoctor({navigation}) {
+export default function ChooseDoctor({route, navigation}) {
+  const {category} = route.params;
+
+  const {data, loading, refetch} = useQuery(GQL_DOCTORS_BY_CATEGORY, {
+    variables: {category},
+  });
+
+  const onRefresh = React.useCallback(() => {
+    refetch({category});
+  }, [category, refetch]);
+
   return (
-    <ScrollView showsVerticalScrollIndicator={false}>
-      {JSONDummyData.chooseDoctors.map(doctor => {
-        return (
-          <ListDoctor
-            iconNext
-            key={doctor.id}
-            name={doctor.name}
-            desc={doctor.gender}
-            pic={doctor.pic}
-            onPress={() => navigation.navigate('Chatting')}
-          />
-        );
-      })}
+    <ScrollView
+      refreshControl={
+        <RefreshControl refreshing={loading} onRefresh={onRefresh} />
+      }
+      showsVerticalScrollIndicator={false}>
+      {!loading &&
+        data.getDoctorsByCategory.map(doctor => {
+          return (
+            <ListDoctor
+              iconNext
+              key={doctor.id}
+              name={doctor.fullName}
+              desc={doctor.gender === 'male' ? 'Pria' : 'Female'}
+              pic={doctor.photoUrl}
+              onPress={() => navigation.navigate('Chatting')}
+            />
+          );
+        })}
     </ScrollView>
   );
 }
-
-const styles = StyleSheet.create({});
