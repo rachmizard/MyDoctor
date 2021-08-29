@@ -1,23 +1,22 @@
-import React from 'react';
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import {BottomNavigator, Header, HeaderChat} from 'components';
 import {
+  ChattingPage,
+  ChooseDoctorPage,
+  DoctorPage,
+  DoctorProfilePage,
+  EditProfilePage,
   GetStartedPage,
+  HospitalsPage,
+  LoginPage,
+  MessagesPage,
   RegisterPage,
   SplashPage,
-  LoginPage,
   UploadPhotoPage,
-  DoctorPage,
-  MessagesPage,
-  HospitalsPage,
-  ChooseDoctorPage,
-  ChattingPage,
   UserProfilePage,
-  EditProfilePage,
-  DoctorProfilePage,
 } from 'pages';
-import {BottomNavigator, Header, HeaderChat} from 'components';
-import {useAuth} from 'hooks';
+import React from 'react';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -118,8 +117,6 @@ const MainApp = () => {
 };
 
 export default function Navigations() {
-  const {checkAuth} = useAuth();
-
   return (
     <Stack.Navigator initialRouteName="Splash">
       <Stack.Screen

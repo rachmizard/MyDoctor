@@ -3,7 +3,6 @@ import {
   ICDescription,
   ICStarOutline,
   ICTranslate,
-  UserShayna2,
 } from 'assets';
 import {Avatar, Button, Gap, ProfileItem} from 'components';
 import {useAuth} from 'hooks';
