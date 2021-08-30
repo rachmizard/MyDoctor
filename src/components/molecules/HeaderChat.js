@@ -14,7 +14,8 @@ export default function HeaderChat({route, navigation}) {
         <Text style={styles.title}>{doctor.fullName}</Text>
         <Text style={styles.profession}>{doctor.category}</Text>
       </View>
-      <TouchableOpacity onPress={() => navigation.navigate('DoctorProfile')}>
+      <TouchableOpacity
+        onPress={() => navigation.navigate('DoctorProfile', {id: doctor.id})}>
         <Image source={{uri: doctor.photoUrl}} style={styles.avatar} />
       </TouchableOpacity>
     </View>

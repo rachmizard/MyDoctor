@@ -11,13 +11,13 @@ const errorLink = onError(({graphQLErrors, networkError}) => {
   if (graphQLErrors) {
     graphQLErrors.map(({extensions, message, locations, path}) => {
       if (extensions.code === 'UNAUTHENTICATED') {
-        showMessage({
-          type: 'danger',
-          message,
-        });
-
         RootNavigation.replace('AuthApp', {screen: 'Login'});
       }
+
+      showMessage({
+        type: 'danger',
+        message,
+      });
 
       console.log(
         `[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`,

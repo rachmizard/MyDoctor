@@ -1,40 +1,60 @@
+import {useQuery} from '@apollo/client';
 import {Avatar, Button, Gap, ProfileItemDoctor} from 'components';
+import {GQL_DOCTOR_BY_ID} from 'gql/doctor/doctor.typeDefs';
 import React from 'react';
-import {StyleSheet, View} from 'react-native';
+import {ActivityIndicator, StyleSheet, View} from 'react-native';
 import {colors} from 'utils';
 
-export default function DoctorProfile({navigation}) {
+export default function DoctorProfile({route, navigation}) {
+  const {id} = route.params;
+
+  const {data, loading} = useQuery(GQL_DOCTOR_BY_ID, {
+    variables: {id},
+  });
+
   return (
     <View style={styles.page}>
-      <Avatar
-        pic={null}
-        name="Nairobi Putri Hayza"
-        profession="Dokter Anak"
-        gender="female"
-        withGender
-      />
-      <View style={styles.items}>
-        <ProfileItemDoctor
-          infoTitle="Alumnus"
-          infoDesc="Universitas Indonesia, 2003"
+      {loading ? (
+        <ActivityIndicator
+          size={30}
+          color={colors.secondary}
+          style={styles.indicator}
         />
-        <ProfileItemDoctor
-          infoTitle="Tempat Praktik"
-          infoDesc="Rumah Sakit Umum, Bandung"
-        />
-        <ProfileItemDoctor
-          infoTitle="No. STR"
-          infoDesc="0000116622081996"
-          withoutBorderBottom
-        />
-      </View>
-      <Gap height={23} />
-      <View style={styles.buttonWrapper}>
-        <Button
-          title="Start Consultation"
-          onPress={() => navigation.navigate('Chatting')}
-        />
-      </View>
+      ) : (
+        <>
+          <Avatar
+            pic={data.getDoctorById.photoUrl}
+            name={data.getDoctorById.fullName}
+            profession={data.getDoctorById.category}
+            gender={data.getDoctorById.gender}
+            withGender
+          />
+          <View style={styles.items}>
+            <ProfileItemDoctor
+              infoTitle="Alumnus"
+              infoDesc={data.getDoctorById.alumnus}
+            />
+            <ProfileItemDoctor
+              infoTitle="Tempat Praktik"
+              infoDesc={data.getDoctorById.practicePlace}
+            />
+            <ProfileItemDoctor
+              infoTitle="No. STR"
+              infoDesc={data.getDoctorById.strNumber}
+              withoutBorderBottom
+            />
+          </View>
+          <Gap height={23} />
+          <View style={styles.buttonWrapper}>
+            <Button
+              title="Start Consultation"
+              onPress={() =>
+                navigation.navigate('Chatting', {doctor: data.getDoctorById})
+              }
+            />
+          </View>
+        </>
+      )}
     </View>
   );
 }
@@ -50,5 +70,10 @@ const styles = StyleSheet.create({
   },
   buttonWrapper: {
     paddingHorizontal: 40,
+  },
+  indicator: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
 });
