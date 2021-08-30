@@ -2,7 +2,12 @@ import {useQuery} from '@apollo/client';
 import {ListDoctor, ListEmpty} from 'components';
 import {GQL_DOCTORS_BY_CATEGORY} from 'gql/doctor/doctor.typeDefs';
 import React from 'react';
-import {ActivityIndicator, RefreshControl, ScrollView} from 'react-native';
+import {
+  ActivityIndicator,
+  RefreshControl,
+  ScrollView,
+  StyleSheet,
+} from 'react-native';
 
 export default function ChooseDoctor({route, navigation}) {
   const {category} = route.params;
@@ -12,7 +17,9 @@ export default function ChooseDoctor({route, navigation}) {
   });
 
   if (loading) {
-    return <ActivityIndicator size={30} color="black" />;
+    return (
+      <ActivityIndicator style={styles.indicator} size={30} color="black" />
+    );
   }
 
   if (data === undefined || data.getDoctorsByCategory.length === 0) {
@@ -45,3 +52,11 @@ export default function ChooseDoctor({route, navigation}) {
     </ScrollView>
   );
 }
+
+const styles = StyleSheet.create({
+  indicator: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+});
