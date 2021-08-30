@@ -1,8 +1,8 @@
 import {useQuery} from '@apollo/client';
-import {ListDoctor} from 'components';
+import {ListDoctor, ListEmpty} from 'components';
 import {GQL_DOCTORS_BY_CATEGORY} from 'gql/doctor/doctor.typeDefs';
 import React from 'react';
-import {RefreshControl, ScrollView} from 'react-native';
+import {ActivityIndicator, RefreshControl, ScrollView} from 'react-native';
 
 export default function ChooseDoctor({route, navigation}) {
   const {category} = route.params;
@@ -11,9 +11,17 @@ export default function ChooseDoctor({route, navigation}) {
     variables: {category},
   });
 
-  const onRefresh = React.useCallback(() => {
+  if (loading) {
+    return <ActivityIndicator size={30} color="black" />;
+  }
+
+  if (data === undefined || data.getDoctorsByCategory.length === 0) {
+    return <ListEmpty description="Doctors are unavailable :(" />;
+  }
+
+  const onRefresh = () => {
     refetch({category});
-  }, [category, refetch]);
+  };
 
   return (
     <ScrollView
@@ -21,7 +29,7 @@ export default function ChooseDoctor({route, navigation}) {
         <RefreshControl refreshing={loading} onRefresh={onRefresh} />
       }
       showsVerticalScrollIndicator={false}>
-      {!loading &&
+      {data &&
         data.getDoctorsByCategory.map(doctor => {
           return (
             <ListDoctor

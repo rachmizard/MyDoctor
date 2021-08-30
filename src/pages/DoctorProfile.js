@@ -1,4 +1,3 @@
-import {DoctorNairobi} from 'assets';
 import {Avatar, Button, Gap, ProfileItemDoctor} from 'components';
 import React from 'react';
 import {StyleSheet, View} from 'react-native';
@@ -8,7 +7,7 @@ export default function DoctorProfile({navigation}) {
   return (
     <View style={styles.page}>
       <Avatar
-        pic={DoctorNairobi}
+        pic={null}
         name="Nairobi Putri Hayza"
         profession="Dokter Anak"
         gender="female"

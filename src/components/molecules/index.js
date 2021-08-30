@@ -14,6 +14,7 @@ import InputChat from './InputChat';
 import ProfileItem from './ProfileItem';
 import ProfileItemDoctor from './ProfileItemDoctor';
 import Avatar from './Avatar';
+import ListEmpty from './ListEmpty';
 
 export {
   Header,
@@ -32,4 +33,5 @@ export {
   ProfileItem,
   ProfileItemDoctor,
   Avatar,
+  ListEmpty,
 };
