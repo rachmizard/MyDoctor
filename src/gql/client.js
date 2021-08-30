@@ -2,12 +2,23 @@ import {ApolloClient, from, InMemoryCache} from '@apollo/client';
 import {HttpLink} from '@apollo/client/core';
 import {setContext} from '@apollo/client/link/context';
 import {onError} from '@apollo/client/link/error';
+import {showMessage} from 'react-native-flash-message';
 import {store} from '../stores';
 import {rootTypeDef} from './typeDefs';
+import * as RootNavigation from 'navigations/RootNavigation';
 
 const errorLink = onError(({graphQLErrors, networkError}) => {
   if (graphQLErrors) {
-    graphQLErrors.map(({message, locations, path}) => {
+    graphQLErrors.map(({extensions, message, locations, path}) => {
+      if (extensions.code === 'UNAUTHENTICATED') {
+        showMessage({
+          type: 'danger',
+          message,
+        });
+
+        RootNavigation.replace('AuthApp', {screen: 'Login'});
+      }
+
       console.log(
         `[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`,
       );
