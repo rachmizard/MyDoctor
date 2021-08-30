@@ -12,49 +12,49 @@ export default function DoctorProfile({route, navigation}) {
     variables: {id},
   });
 
+  if (loading) {
+    return (
+      <ActivityIndicator
+        size={30}
+        color={colors.secondary}
+        style={styles.indicator}
+      />
+    );
+  }
+
   return (
     <View style={styles.page}>
-      {loading ? (
-        <ActivityIndicator
-          size={30}
-          color={colors.secondary}
-          style={styles.indicator}
+      <Avatar
+        pic={data.getDoctorById.photoUrl}
+        name={data.getDoctorById.fullName}
+        profession={data.getDoctorById.category}
+        gender={data.getDoctorById.gender}
+        withGender
+      />
+      <View style={styles.items}>
+        <ProfileItemDoctor
+          infoTitle="Alumnus"
+          infoDesc={data.getDoctorById.alumnus}
         />
-      ) : (
-        <>
-          <Avatar
-            pic={data.getDoctorById.photoUrl}
-            name={data.getDoctorById.fullName}
-            profession={data.getDoctorById.category}
-            gender={data.getDoctorById.gender}
-            withGender
-          />
-          <View style={styles.items}>
-            <ProfileItemDoctor
-              infoTitle="Alumnus"
-              infoDesc={data.getDoctorById.alumnus}
-            />
-            <ProfileItemDoctor
-              infoTitle="Tempat Praktik"
-              infoDesc={data.getDoctorById.practicePlace}
-            />
-            <ProfileItemDoctor
-              infoTitle="No. STR"
-              infoDesc={data.getDoctorById.strNumber}
-              withoutBorderBottom
-            />
-          </View>
-          <Gap height={23} />
-          <View style={styles.buttonWrapper}>
-            <Button
-              title="Start Consultation"
-              onPress={() =>
-                navigation.navigate('Chatting', {doctor: data.getDoctorById})
-              }
-            />
-          </View>
-        </>
-      )}
+        <ProfileItemDoctor
+          infoTitle="Tempat Praktik"
+          infoDesc={data.getDoctorById.practicePlace}
+        />
+        <ProfileItemDoctor
+          infoTitle="No. STR"
+          infoDesc={data.getDoctorById.strNumber}
+          withoutBorderBottom
+        />
+      </View>
+      <Gap height={23} />
+      <View style={styles.buttonWrapper}>
+        <Button
+          title="Start Consultation"
+          onPress={() =>
+            navigation.navigate('Chatting', {doctor: data.getDoctorById})
+          }
+        />
+      </View>
     </View>
   );
 }
