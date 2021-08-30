@@ -38,7 +38,7 @@ export default function ChooseDoctor({route, navigation}) {
               name={doctor.fullName}
               desc={doctor.gender === 'male' ? 'Pria' : 'Female'}
               pic={doctor.photoUrl}
-              onPress={() => navigation.navigate('Chatting')}
+              onPress={() => navigation.navigate('Chatting', {doctor})}
             />
           );
         })}
