@@ -1,14 +1,16 @@
 import {ICBackLight} from 'assets';
 import React from 'react';
 import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {colors, fonts} from 'utils';
 import {IconButton} from '../atoms';
 
 export default function HeaderChat({route, navigation}) {
   const {doctor} = route.params;
+  const insets = useSafeAreaInsets();
 
   return (
-    <View style={styles.header}>
+    <View style={[styles.header, {paddingTop: insets.top}]}>
       <IconButton icon={<ICBackLight />} onPress={() => navigation.goBack()} />
       <View style={styles.titleWrapper}>
         <Text style={styles.title}>{doctor.fullName}</Text>
@@ -28,7 +30,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-between',
     paddingHorizontal: 16,
-    paddingVertical: 30,
+    paddingVertical: 15,
     backgroundColor: colors.secondary,
     borderBottomLeftRadius: 20,
     borderBottomRightRadius: 20,

@@ -10,6 +10,7 @@ import {Flash} from 'components';
 import {PersistGate} from 'redux-persist/integration/react';
 import {store, persistor} from 'stores';
 import {navigationRef} from 'navigations/RootNavigation';
+import {SafeAreaProvider} from 'react-native-safe-area-context';
 
 export default function App() {
   const {initialState, getPersistenceKey, isReady, setAsyncStorage} =
@@ -23,14 +24,16 @@ export default function App() {
     <ApolloProvider client={client}>
       <Provider store={store}>
         <PersistGate persistor={persistor}>
-          <NavigationContainer
-            ref={navigationRef}
-            initialState={initialState}
-            onStateChange={state =>
-              setAsyncStorage(getPersistenceKey, JSON.stringify(state))
-            }>
-            <Navigations />
-          </NavigationContainer>
+          <SafeAreaProvider>
+            <NavigationContainer
+              ref={navigationRef}
+              initialState={initialState}
+              onStateChange={state =>
+                setAsyncStorage(getPersistenceKey, JSON.stringify(state))
+              }>
+              <Navigations />
+            </NavigationContainer>
+          </SafeAreaProvider>
           <Flash />
         </PersistGate>
       </Provider>

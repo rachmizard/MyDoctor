@@ -6,6 +6,7 @@ import {
   ActivityIndicator,
   RefreshControl,
   ScrollView,
+  StatusBar,
   StyleSheet,
 } from 'react-native';
 
@@ -36,6 +37,7 @@ export default function ChooseDoctor({route, navigation}) {
         <RefreshControl refreshing={loading} onRefresh={onRefresh} />
       }
       showsVerticalScrollIndicator={false}>
+      <StatusBar barStyle="light-content" />
       {data &&
         data.getDoctorsByCategory.map(doctor => {
           return (

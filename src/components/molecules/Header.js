@@ -3,8 +3,11 @@ import {StyleSheet, Text, View} from 'react-native';
 import {ICBackDark, ICBackLight} from 'assets';
 import {Gap, IconButton} from 'components/atoms';
 import {colors, fonts} from 'utils';
+import {useSafeAreaInsets} from 'react-native-safe-area-context';
 
 export default function Header({options, navigation, type}) {
+  const insets = useSafeAreaInsets();
+
   const Icon = () => {
     if (type === 'dark') {
       return <ICBackLight />;
@@ -14,7 +17,7 @@ export default function Header({options, navigation, type}) {
   };
 
   return (
-    <View style={styles.header(type)}>
+    <View style={[styles.header(type), {paddingTop: insets.top}]}>
       <IconButton icon={<Icon />} onPress={() => navigation.goBack()} />
       <Text style={styles.title(type)}>{options.headerTitle}</Text>
       <Gap width={24} />

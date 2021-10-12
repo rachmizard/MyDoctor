@@ -2,7 +2,7 @@ import {useQuery} from '@apollo/client';
 import {Avatar, Button, Gap, ProfileItemDoctor} from 'components';
 import {GQL_DOCTOR_BY_ID} from 'gql/doctor/doctor.typeDefs';
 import React from 'react';
-import {ActivityIndicator, StyleSheet, View} from 'react-native';
+import {ActivityIndicator, StatusBar, StyleSheet, View} from 'react-native';
 import {colors} from 'utils';
 
 export default function DoctorProfile({route, navigation}) {
@@ -24,6 +24,7 @@ export default function DoctorProfile({route, navigation}) {
 
   return (
     <View style={styles.page}>
+      <StatusBar barStyle="dark-content" />
       <Avatar
         pic={data.getDoctorById.photoUrl}
         name={data.getDoctorById.fullName}

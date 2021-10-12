@@ -2,8 +2,9 @@ import {ILLogo} from 'assets';
 import {Button, Gap, Input, Link} from 'components';
 import {useAuth, useForm} from 'hooks';
 import React from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, Text} from 'react-native';
 import {showMessage} from 'react-native-flash-message';
+import {SafeAreaView} from 'react-native-safe-area-context';
 import {colors, emailReg, fonts} from 'utils';
 
 export default function Login({navigation}) {
@@ -76,7 +77,7 @@ export default function Login({navigation}) {
   };
 
   return (
-    <View style={styles.page}>
+    <SafeAreaView style={styles.page}>
       <ILLogo />
       <Text style={styles.title}>Masuk dan mulai berkonsultasi</Text>
       <Input
@@ -110,7 +111,7 @@ export default function Login({navigation}) {
         align="center"
         onPress={() => navigation.navigate('Register')}
       />
-    </View>
+    </SafeAreaView>
   );
 }
 

@@ -8,13 +8,14 @@ import {
   TouchableWithoutFeedback,
   View,
 } from 'react-native';
+import {SafeAreaView} from 'react-native-safe-area-context';
 import {colors, fonts} from 'utils';
 
 export default function HomeProfile({onPress}) {
   const {auth} = useAuth();
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <TouchableWithoutFeedback onPress={onPress}>
         <Image
           source={!auth.photoUrl ? ILUserDefault : {uri: auth.photoUrl}}
@@ -25,7 +26,7 @@ export default function HomeProfile({onPress}) {
         <Text style={styles.name}>{auth?.fullName}</Text>
         <Text style={styles.profession}>{auth?.job}</Text>
       </View>
-    </View>
+    </SafeAreaView>
   );
 }
 

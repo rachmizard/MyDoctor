@@ -43,7 +43,7 @@ const authLink = setContext((_, {headers}) => {
 
 const link = from([
   errorLink,
-  new HttpLink({uri: 'http://192.168.1.7:5000/graphql'}),
+  new HttpLink({uri: 'https://my-doctor-backend-stg.herokuapp.com/graphql'}),
 ]);
 
 const client = new ApolloClient({
