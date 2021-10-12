@@ -9,6 +9,9 @@
     "test": "jest",
     "lint": "eslint ."
   },
+  "rnpm": {
+    "assets": ["./assets/fonts/"]
+  },
   "dependencies": {
     "@apollo/client": "^3.4.8",
     "@react-native-async-storage/async-storage": "^1.15.5",
